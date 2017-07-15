@@ -1,0 +1,17 @@
+(x,y) = (0,0) is top left of pitch
+
+all x coordinates are perpendicular distance from goal line
+x axis max is 480
+y axis max is 366
+
+y = 366/2 is the middle of the goal
+
+the proba (p) seems to follow this relationship with distance(d)
+
+ln(p) = -0.0286d + 0.02373
+
+therefore: p = exp(-0.0286d)
+
+simulation takes 10 seconds to do 100 iterations
+
+

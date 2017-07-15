@@ -1,0 +1,381 @@
+,AwayTeam,Date,HomeTeam
+0,Leicester,Sat 12 Aug 2017,Arsenal
+1,Man City,Sat 12 Aug 2017,Brighton
+2,Burnley,Sat 12 Aug 2017,Chelsea
+3,Huddersfield,Sat 12 Aug 2017,Crystal Palace
+4,Stoke,Sat 12 Aug 2017,Everton
+5,West Ham,Sat 12 Aug 2017,Man United
+6,Tottenham,Sat 12 Aug 2017,Newcastle
+7,Swansea,Sat 12 Aug 2017,Southampton
+8,Liverpool,Sat 12 Aug 2017,Watford
+9,Bournemouth,Sat 12 Aug 2017,West Brom
+10,Watford,Sat 19 Aug 2017,Bournemouth
+11,West Brom,Sat 19 Aug 2017,Burnley
+12,Newcastle,Sat 19 Aug 2017,Huddersfield
+13,Brighton,Sat 19 Aug 2017,Leicester
+14,Crystal Palace,Sat 19 Aug 2017,Liverpool
+15,Everton,Sat 19 Aug 2017,Man City
+16,Arsenal,Sat 19 Aug 2017,Stoke
+17,Man United,Sat 19 Aug 2017,Swansea
+18,Chelsea,Sat 19 Aug 2017,Tottenham
+19,Southampton,Sat 19 Aug 2017,West Ham
+20,Man City,Sat 26 Aug 2017,Bournemouth
+21,Everton,Sat 26 Aug 2017,Chelsea
+22,Swansea,Sat 26 Aug 2017,Crystal Palace
+23,Southampton,Sat 26 Aug 2017,Huddersfield
+24,Arsenal,Sat 26 Aug 2017,Liverpool
+25,Leicester,Sat 26 Aug 2017,Man United
+26,West Ham,Sat 26 Aug 2017,Newcastle
+27,Burnley,Sat 26 Aug 2017,Tottenham
+28,Brighton,Sat 26 Aug 2017,Watford
+29,Stoke,Sat 26 Aug 2017,West Brom
+30,Bournemouth,Sat 09 Sep 2017,Arsenal
+31,West Brom,Sat 09 Sep 2017,Brighton
+32,Crystal Palace,Sat 09 Sep 2017,Burnley
+33,Tottenham,Sat 09 Sep 2017,Everton
+34,Chelsea,Sat 09 Sep 2017,Leicester
+35,Liverpool,Sat 09 Sep 2017,Man City
+36,Watford,Sat 09 Sep 2017,Southampton
+37,Man United,Sat 09 Sep 2017,Stoke
+38,Newcastle,Sat 09 Sep 2017,Swansea
+39,Huddersfield,Sat 09 Sep 2017,West Ham
+40,Brighton,Sat 16 Sep 2017,Bournemouth
+41,Arsenal,Sat 16 Sep 2017,Chelsea
+42,Southampton,Sat 16 Sep 2017,Crystal Palace
+43,Leicester,Sat 16 Sep 2017,Huddersfield
+44,Burnley,Sat 16 Sep 2017,Liverpool
+45,Everton,Sat 16 Sep 2017,Man United
+46,Stoke,Sat 16 Sep 2017,Newcastle
+47,Swansea,Sat 16 Sep 2017,Tottenham
+48,Man City,Sat 16 Sep 2017,Watford
+49,West Ham,Sat 16 Sep 2017,West Brom
+50,West Brom,Sat 23 Sep 2017,Arsenal
+51,Newcastle,Sat 23 Sep 2017,Brighton
+52,Huddersfield,Sat 23 Sep 2017,Burnley
+53,Bournemouth,Sat 23 Sep 2017,Everton
+54,Liverpool,Sat 23 Sep 2017,Leicester
+55,Crystal Palace,Sat 23 Sep 2017,Man City
+56,Man United,Sat 23 Sep 2017,Southampton
+57,Chelsea,Sat 23 Sep 2017,Stoke
+58,Watford,Sat 23 Sep 2017,Swansea
+59,Tottenham,Sat 23 Sep 2017,West Ham
+60,Brighton,Sat 30 Sep 2017,Arsenal
+61,Leicester,Sat 30 Sep 2017,Bournemouth
+62,Man City,Sat 30 Sep 2017,Chelsea
+63,Burnley,Sat 30 Sep 2017,Everton
+64,Tottenham,Sat 30 Sep 2017,Huddersfield
+65,Crystal Palace,Sat 30 Sep 2017,Man United
+66,Liverpool,Sat 30 Sep 2017,Newcastle
+67,Southampton,Sat 30 Sep 2017,Stoke
+68,Watford,Sat 30 Sep 2017,West Brom
+69,Swansea,Sat 30 Sep 2017,West Ham
+70,Everton,Sat 14 Oct 2017,Brighton
+71,West Ham,Sat 14 Oct 2017,Burnley
+72,Chelsea,Sat 14 Oct 2017,Crystal Palace
+73,West Brom,Sat 14 Oct 2017,Leicester
+74,Man United,Sat 14 Oct 2017,Liverpool
+75,Stoke,Sat 14 Oct 2017,Man City
+76,Newcastle,Sat 14 Oct 2017,Southampton
+77,Huddersfield,Sat 14 Oct 2017,Swansea
+78,Bournemouth,Sat 14 Oct 2017,Tottenham
+79,Arsenal,Sat 14 Oct 2017,Watford
+80,Watford,Sat 21 Oct 2017,Chelsea
+81,Arsenal,Sat 21 Oct 2017,Everton
+82,Man United,Sat 21 Oct 2017,Huddersfield
+83,Burnley,Sat 21 Oct 2017,Man City
+84,Crystal Palace,Sat 21 Oct 2017,Newcastle
+85,West Brom,Sat 21 Oct 2017,Southampton
+86,Bournemouth,Sat 21 Oct 2017,Stoke
+87,Leicester,Sat 21 Oct 2017,Swansea
+88,Liverpool,Sat 21 Oct 2017,Tottenham
+89,Brighton,Sat 21 Oct 2017,West Ham
+90,Swansea,Sat 28 Oct 2017,Arsenal
+91,Chelsea,Sat 28 Oct 2017,Bournemouth
+92,Southampton,Sat 28 Oct 2017,Brighton
+93,Newcastle,Sat 28 Oct 2017,Burnley
+94,West Ham,Sat 28 Oct 2017,Crystal Palace
+95,Everton,Sat 28 Oct 2017,Leicester
+96,Huddersfield,Sat 28 Oct 2017,Liverpool
+97,Tottenham,Sat 28 Oct 2017,Man United
+98,Stoke,Sat 28 Oct 2017,Watford
+99,Man City,Sat 28 Oct 2017,West Brom
+100,Man United,Sat 04 Nov 2017,Chelsea
+101,Watford,Sat 04 Nov 2017,Everton
+102,West Brom,Sat 04 Nov 2017,Huddersfield
+103,Arsenal,Sat 04 Nov 2017,Man City
+104,Bournemouth,Sat 04 Nov 2017,Newcastle
+105,Burnley,Sat 04 Nov 2017,Southampton
+106,Leicester,Sat 04 Nov 2017,Stoke
+107,Brighton,Sat 04 Nov 2017,Swansea
+108,Crystal Palace,Sat 04 Nov 2017,Tottenham
+109,Liverpool,Sat 04 Nov 2017,West Ham
+110,Tottenham,Sat 18 Nov 2017,Arsenal
+111,Huddersfield,Sat 18 Nov 2017,Bournemouth
+112,Stoke,Sat 18 Nov 2017,Brighton
+113,Swansea,Sat 18 Nov 2017,Burnley
+114,Everton,Sat 18 Nov 2017,Crystal Palace
+115,Man City,Sat 18 Nov 2017,Leicester
+116,Southampton,Sat 18 Nov 2017,Liverpool
+117,Newcastle,Sat 18 Nov 2017,Man United
+118,West Ham,Sat 18 Nov 2017,Watford
+119,Chelsea,Sat 18 Nov 2017,West Brom
+120,Arsenal,Sat 25 Nov 2017,Burnley
+121,Stoke,Sat 25 Nov 2017,Crystal Palace
+122,Man City,Sat 25 Nov 2017,Huddersfield
+123,Chelsea,Sat 25 Nov 2017,Liverpool
+124,Brighton,Sat 25 Nov 2017,Man United
+125,Watford,Sat 25 Nov 2017,Newcastle
+126,Everton,Sat 25 Nov 2017,Southampton
+127,Bournemouth,Sat 25 Nov 2017,Swansea
+128,West Brom,Sat 25 Nov 2017,Tottenham
+129,Leicester,Sat 25 Nov 2017,West Ham
+130,Southampton,Wed 29 Nov 2017,Man City
+131,Liverpool,Wed 29 Nov 2017,Stoke
+132,Swansea,Wed 29 Nov 2017,Chelsea
+133,West Ham,Wed 29 Nov 2017,Everton
+134,Newcastle,Wed 29 Nov 2017,West Brom
+135,Huddersfield,Wed 29 Nov 2017,Arsenal
+136,Burnley,Wed 29 Nov 2017,Bournemouth
+137,Crystal Palace,Wed 29 Nov 2017,Brighton
+138,Tottenham,Wed 29 Nov 2017,Leicester
+139,Man United,Wed 29 Nov 2017,Watford
+140,Man United,Sat 02 Dec 2017,Arsenal
+141,Southampton,Sat 02 Dec 2017,Bournemouth
+142,Liverpool,Sat 02 Dec 2017,Brighton
+143,Newcastle,Sat 02 Dec 2017,Chelsea
+144,Huddersfield,Sat 02 Dec 2017,Everton
+145,Burnley,Sat 02 Dec 2017,Leicester
+146,West Ham,Sat 02 Dec 2017,Man City
+147,Swansea,Sat 02 Dec 2017,Stoke
+148,Tottenham,Sat 02 Dec 2017,Watford
+149,Crystal Palace,Sat 02 Dec 2017,West Brom
+150,Watford,Sat 09 Dec 2017,Burnley
+151,Bournemouth,Sat 09 Dec 2017,Crystal Palace
+152,Brighton,Sat 09 Dec 2017,Huddersfield
+153,Everton,Sat 09 Dec 2017,Liverpool
+154,Man City,Sat 09 Dec 2017,Man United
+155,Leicester,Sat 09 Dec 2017,Newcastle
+156,Arsenal,Sat 09 Dec 2017,Southampton
+157,West Brom,Sat 09 Dec 2017,Swansea
+158,Stoke,Sat 09 Dec 2017,Tottenham
+159,Chelsea,Sat 09 Dec 2017,West Ham
+160,West Brom,Wed 13 Dec 2017,Liverpool
+161,Brighton,Wed 13 Dec 2017,Tottenham
+162,Everton,Wed 13 Dec 2017,Newcastle
+163,Leicester,Wed 13 Dec 2017,Southampton
+164,Watford,Wed 13 Dec 2017,Crystal Palace
+165,Bournemouth,Wed 13 Dec 2017,Man United
+166,Stoke,Wed 13 Dec 2017,Burnley
+167,Chelsea,Wed 13 Dec 2017,Huddersfield
+168,Man City,Wed 13 Dec 2017,Swansea
+169,Arsenal,Wed 13 Dec 2017,West Ham
+170,Newcastle,Sat 16 Dec 2017,Arsenal
+171,Liverpool,Sat 16 Dec 2017,Bournemouth
+172,Burnley,Sat 16 Dec 2017,Brighton
+173,Southampton,Sat 16 Dec 2017,Chelsea
+174,Swansea,Sat 16 Dec 2017,Everton
+175,Crystal Palace,Sat 16 Dec 2017,Leicester
+176,Tottenham,Sat 16 Dec 2017,Man City
+177,West Ham,Sat 16 Dec 2017,Stoke
+178,Huddersfield,Sat 16 Dec 2017,Watford
+179,Man United,Sat 16 Dec 2017,West Brom
+180,Liverpool,Sat 23 Dec 2017,Arsenal
+181,Watford,Sat 23 Dec 2017,Brighton
+182,Tottenham,Sat 23 Dec 2017,Burnley
+183,Chelsea,Sat 23 Dec 2017,Everton
+184,Man United,Sat 23 Dec 2017,Leicester
+185,Bournemouth,Sat 23 Dec 2017,Man City
+186,Huddersfield,Sat 23 Dec 2017,Southampton
+187,West Brom,Sat 23 Dec 2017,Stoke
+188,Crystal Palace,Sat 23 Dec 2017,Swansea
+189,Newcastle,Sat 23 Dec 2017,West Ham
+190,West Ham,Tue 26 Dec 2017,Bournemouth
+191,Brighton,Tue 26 Dec 2017,Chelsea
+192,Arsenal,Tue 26 Dec 2017,Crystal Palace
+193,Stoke,Tue 26 Dec 2017,Huddersfield
+194,Swansea,Tue 26 Dec 2017,Liverpool
+195,Burnley,Tue 26 Dec 2017,Man United
+196,Man City,Tue 26 Dec 2017,Newcastle
+197,Southampton,Tue 26 Dec 2017,Tottenham
+198,Leicester,Tue 26 Dec 2017,Watford
+199,Everton,Tue 26 Dec 2017,West Brom
+200,Everton,Sat 30 Dec 2017,Bournemouth
+201,Stoke,Sat 30 Dec 2017,Chelsea
+202,Man City,Sat 30 Dec 2017,Crystal Palace
+203,Burnley,Sat 30 Dec 2017,Huddersfield
+204,Leicester,Sat 30 Dec 2017,Liverpool
+205,Southampton,Sat 30 Dec 2017,Man United
+206,Brighton,Sat 30 Dec 2017,Newcastle
+207,West Ham,Sat 30 Dec 2017,Tottenham
+208,Swansea,Sat 30 Dec 2017,Watford
+209,Arsenal,Sat 30 Dec 2017,West Brom
+210,Chelsea,Mon 01 Jan 2018,Arsenal
+211,Bournemouth,Mon 01 Jan 2018,Brighton
+212,Liverpool,Mon 01 Jan 2018,Burnley
+213,Man United,Mon 01 Jan 2018,Everton
+214,Huddersfield,Mon 01 Jan 2018,Leicester
+215,Watford,Mon 01 Jan 2018,Man City
+216,Crystal Palace,Mon 01 Jan 2018,Southampton
+217,Newcastle,Mon 01 Jan 2018,Stoke
+218,Tottenham,Mon 01 Jan 2018,Swansea
+219,West Brom,Mon 01 Jan 2018,West Ham
+220,Arsenal,Sat 13 Jan 2018,Bournemouth
+221,Leicester,Sat 13 Jan 2018,Chelsea
+222,Burnley,Sat 13 Jan 2018,Crystal Palace
+223,West Ham,Sat 13 Jan 2018,Huddersfield
+224,Man City,Sat 13 Jan 2018,Liverpool
+225,Stoke,Sat 13 Jan 2018,Man United
+226,Swansea,Sat 13 Jan 2018,Newcastle
+227,Everton,Sat 13 Jan 2018,Tottenham
+228,Southampton,Sat 13 Jan 2018,Watford
+229,Brighton,Sat 13 Jan 2018,West Brom
+230,Crystal Palace,Sat 20 Jan 2018,Arsenal
+231,Chelsea,Sat 20 Jan 2018,Brighton
+232,Man United,Sat 20 Jan 2018,Burnley
+233,West Brom,Sat 20 Jan 2018,Everton
+234,Watford,Sat 20 Jan 2018,Leicester
+235,Newcastle,Sat 20 Jan 2018,Man City
+236,Tottenham,Sat 20 Jan 2018,Southampton
+237,Huddersfield,Sat 20 Jan 2018,Stoke
+238,Liverpool,Sat 20 Jan 2018,Swansea
+239,Bournemouth,Sat 20 Jan 2018,West Ham
+240,West Brom,Wed 31 Jan 2018,Man City
+241,Watford,Wed 31 Jan 2018,Stoke
+242,Man United,Wed 31 Jan 2018,Tottenham
+243,Bournemouth,Wed 31 Jan 2018,Chelsea
+244,Leicester,Wed 31 Jan 2018,Everton
+245,Burnley,Wed 31 Jan 2018,Newcastle
+246,Brighton,Wed 31 Jan 2018,Southampton
+247,Liverpool,Wed 31 Jan 2018,Huddersfield
+248,Arsenal,Wed 31 Jan 2018,Swansea
+249,Crystal Palace,Wed 31 Jan 2018,West Ham
+250,Everton,Sat 03 Feb 2018,Arsenal
+251,Stoke,Sat 03 Feb 2018,Bournemouth
+252,West Ham,Sat 03 Feb 2018,Brighton
+253,Man City,Sat 03 Feb 2018,Burnley
+254,Newcastle,Sat 03 Feb 2018,Crystal Palace
+255,Swansea,Sat 03 Feb 2018,Leicester
+256,Tottenham,Sat 03 Feb 2018,Liverpool
+257,Huddersfield,Sat 03 Feb 2018,Man United
+258,Chelsea,Sat 03 Feb 2018,Watford
+259,Southampton,Sat 03 Feb 2018,West Brom
+260,West Brom,Sat 10 Feb 2018,Chelsea
+261,Crystal Palace,Sat 10 Feb 2018,Everton
+262,Bournemouth,Sat 10 Feb 2018,Huddersfield
+263,Leicester,Sat 10 Feb 2018,Man City
+264,Man United,Sat 10 Feb 2018,Newcastle
+265,Liverpool,Sat 10 Feb 2018,Southampton
+266,Brighton,Sat 10 Feb 2018,Stoke
+267,Burnley,Sat 10 Feb 2018,Swansea
+268,Arsenal,Sat 10 Feb 2018,Tottenham
+269,Watford,Sat 10 Feb 2018,West Ham
+270,Man City,Sat 24 Feb 2018,Arsenal
+271,Newcastle,Sat 24 Feb 2018,Bournemouth
+272,Swansea,Sat 24 Feb 2018,Brighton
+273,Southampton,Sat 24 Feb 2018,Burnley
+274,Tottenham,Sat 24 Feb 2018,Crystal Palace
+275,Stoke,Sat 24 Feb 2018,Leicester
+276,West Ham,Sat 24 Feb 2018,Liverpool
+277,Chelsea,Sat 24 Feb 2018,Man United
+278,Everton,Sat 24 Feb 2018,Watford
+279,Huddersfield,Sat 24 Feb 2018,West Brom
+280,Arsenal,Sat 03 Mar 2018,Brighton
+281,Everton,Sat 03 Mar 2018,Burnley
+282,Man United,Sat 03 Mar 2018,Crystal Palace
+283,Bournemouth,Sat 03 Mar 2018,Leicester
+284,Newcastle,Sat 03 Mar 2018,Liverpool
+285,Chelsea,Sat 03 Mar 2018,Man City
+286,Stoke,Sat 03 Mar 2018,Southampton
+287,West Ham,Sat 03 Mar 2018,Swansea
+288,Huddersfield,Sat 03 Mar 2018,Tottenham
+289,West Brom,Sat 03 Mar 2018,Watford
+290,Watford,Sat 10 Mar 2018,Arsenal
+291,Tottenham,Sat 10 Mar 2018,Bournemouth
+292,Crystal Palace,Sat 10 Mar 2018,Chelsea
+293,Brighton,Sat 10 Mar 2018,Everton
+294,Swansea,Sat 10 Mar 2018,Huddersfield
+295,Liverpool,Sat 10 Mar 2018,Man United
+296,Southampton,Sat 10 Mar 2018,Newcastle
+297,Man City,Sat 10 Mar 2018,Stoke
+298,Leicester,Sat 10 Mar 2018,West Brom
+299,Burnley,Sat 10 Mar 2018,West Ham
+300,West Brom,Sat 17 Mar 2018,Bournemouth
+301,Chelsea,Sat 17 Mar 2018,Burnley
+302,Crystal Palace,Sat 17 Mar 2018,Huddersfield
+303,Arsenal,Sat 17 Mar 2018,Leicester
+304,Watford,Sat 17 Mar 2018,Liverpool
+305,Brighton,Sat 17 Mar 2018,Man City
+306,Everton,Sat 17 Mar 2018,Stoke
+307,Southampton,Sat 17 Mar 2018,Swansea
+308,Newcastle,Sat 17 Mar 2018,Tottenham
+309,Man United,Sat 17 Mar 2018,West Ham
+310,Stoke,Sat 31 Mar 2018,Arsenal
+311,Leicester,Sat 31 Mar 2018,Brighton
+312,Tottenham,Sat 31 Mar 2018,Chelsea
+313,Liverpool,Sat 31 Mar 2018,Crystal Palace
+314,Man City,Sat 31 Mar 2018,Everton
+315,Swansea,Sat 31 Mar 2018,Man United
+316,Huddersfield,Sat 31 Mar 2018,Newcastle
+317,West Ham,Sat 31 Mar 2018,Southampton
+318,Bournemouth,Sat 31 Mar 2018,Watford
+319,Burnley,Sat 31 Mar 2018,West Brom
+320,Southampton,Sat 07 Apr 2018,Arsenal
+321,Crystal Palace,Sat 07 Apr 2018,Bournemouth
+322,Huddersfield,Sat 07 Apr 2018,Brighton
+323,West Ham,Sat 07 Apr 2018,Chelsea
+324,Liverpool,Sat 07 Apr 2018,Everton
+325,Newcastle,Sat 07 Apr 2018,Leicester
+326,Man United,Sat 07 Apr 2018,Man City
+327,Tottenham,Sat 07 Apr 2018,Stoke
+328,Burnley,Sat 07 Apr 2018,Watford
+329,Swansea,Sat 07 Apr 2018,West Brom
+330,Leicester,Sat 14 Apr 2018,Burnley
+331,Brighton,Sat 14 Apr 2018,Crystal Palace
+332,Watford,Sat 14 Apr 2018,Huddersfield
+333,Bournemouth,Sat 14 Apr 2018,Liverpool
+334,West Brom,Sat 14 Apr 2018,Man United
+335,Arsenal,Sat 14 Apr 2018,Newcastle
+336,Chelsea,Sat 14 Apr 2018,Southampton
+337,Everton,Sat 14 Apr 2018,Swansea
+338,Man City,Sat 14 Apr 2018,Tottenham
+339,Stoke,Sat 14 Apr 2018,West Ham
+340,West Ham,Sat 21 Apr 2018,Arsenal
+341,Man United,Sat 21 Apr 2018,Bournemouth
+342,Tottenham,Sat 21 Apr 2018,Brighton
+343,Huddersfield,Sat 21 Apr 2018,Chelsea
+344,Newcastle,Sat 21 Apr 2018,Everton
+345,Southampton,Sat 21 Apr 2018,Leicester
+346,Swansea,Sat 21 Apr 2018,Man City
+347,Burnley,Sat 21 Apr 2018,Stoke
+348,Crystal Palace,Sat 21 Apr 2018,Watford
+349,Liverpool,Sat 21 Apr 2018,West Brom
+350,Brighton,Sat 28 Apr 2018,Burnley
+351,Leicester,Sat 28 Apr 2018,Crystal Palace
+352,Everton,Sat 28 Apr 2018,Huddersfield
+353,Stoke,Sat 28 Apr 2018,Liverpool
+354,Arsenal,Sat 28 Apr 2018,Man United
+355,West Brom,Sat 28 Apr 2018,Newcastle
+356,Bournemouth,Sat 28 Apr 2018,Southampton
+357,Chelsea,Sat 28 Apr 2018,Swansea
+358,Watford,Sat 28 Apr 2018,Tottenham
+359,Man City,Sat 28 Apr 2018,West Ham
+360,Burnley,Sat 05 May 2018,Arsenal
+361,Swansea,Sat 05 May 2018,Bournemouth
+362,Man United,Sat 05 May 2018,Brighton
+363,Liverpool,Sat 05 May 2018,Chelsea
+364,Southampton,Sat 05 May 2018,Everton
+365,West Ham,Sat 05 May 2018,Leicester
+366,Huddersfield,Sat 05 May 2018,Man City
+367,Crystal Palace,Sat 05 May 2018,Stoke
+368,Newcastle,Sat 05 May 2018,Watford
+369,Tottenham,Sat 05 May 2018,West Brom
+370,Bournemouth,Sun 13 May 2018,Burnley
+371,West Brom,Sun 13 May 2018,Crystal Palace
+372,Arsenal,Sun 13 May 2018,Huddersfield
+373,Brighton,Sun 13 May 2018,Liverpool
+374,Watford,Sun 13 May 2018,Man United
+375,Chelsea,Sun 13 May 2018,Newcastle
+376,Man City,Sun 13 May 2018,Southampton
+377,Stoke,Sun 13 May 2018,Swansea
+378,Leicester,Sun 13 May 2018,Tottenham
+379,Everton,Sun 13 May 2018,West Ham
