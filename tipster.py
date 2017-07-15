@@ -244,7 +244,7 @@ def send_email():
 
     # attach a csv of the transactions
 
-    filename = '/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Tips/'+ datetime.today().strftime("%Y-%m-%d") + '.csv'
+    filename = './Tips/'+ datetime.today().strftime("%Y-%m-%d") + '.csv'
     f = open(filename, 'r')
     attachment = MIMEText(f.read())
     attachment.add_header('Content-Disposition', 'attachment', filename=filename)
