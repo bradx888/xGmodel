@@ -61,10 +61,10 @@ def calculate_win_perc(population, weights):
     return [homeperc, drawperc, awayperc]
 
 def read_in_team_ratings():
-    team_ratings = pd.read_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Team ratings/teamratings_16-17.csv',
+    team_ratings = pd.read_csv('./Team ratings/teamratings_16-17.csv',
                            index_col=0)
 
-    championship_team_ratings = pd.read_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Team ratings/championship_teamratings_16-17.csv',
+    championship_team_ratings = pd.read_csv('./Team ratings/championship_teamratings_16-17.csv',
                                         index_col=0)
 
     for column in championship_team_ratings:
@@ -120,7 +120,7 @@ def get_flashscores_schedule():
         schedule = pd.DataFrame({'KO': times, 'HomeTeam': home_team, 'AwayTeam': away_team})
 
         # convert FlashScores team names to Football Data team names
-        mappings = pd.read_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Team mappings/flashscores_to_footballdata.csv',
+        mappings = pd.read_csv('./Team mappings/flashscores_to_footballdata.csv',
                                index_col=0, header=None)
         schedule.replace(mappings[1], inplace=True)
     except NameError:
@@ -138,7 +138,7 @@ def get_corresponding_odds(schedule, team_ratings):
         # convert FootballData team names to oddschecker names
         schedule['AwayTeam_OddsName'] = schedule['AwayTeam']
         schedule['HomeTeam_OddsName'] = schedule['HomeTeam']
-        mappings = pd.read_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Team mappings/footballdata_to_oddschecker.csv',
+        mappings = pd.read_csv('./Team mappings/footballdata_to_oddschecker.csv',
                                index_col=0, header=None)
         schedule['AwayTeam_OddsName'].replace(mappings[1], inplace=True)
         schedule['HomeTeam_OddsName'].replace(mappings[1], inplace=True)
@@ -184,7 +184,7 @@ def get_corresponding_odds(schedule, team_ratings):
         driver.quit()
         # convert oddschecker team names back to FD team names
         mappings = pd.read_csv(
-            '/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Team mappings/footballdata_to_oddschecker.csv',
+            './Team mappings/footballdata_to_oddschecker.csv',
             index_col=1, header=None)
         #schedule.replace(mappings[0], inplace=True)
         return schedule
@@ -222,7 +222,7 @@ def get_tips(schedule):
                              'AwayTeam': away_team, 'Bookie': bookie}).reindex_axis(['HomeTeam', 'AwayTeam', 'Selection',
                                                                    'MyOdds', 'Bookies Odds', 'Bookie'], axis=1)
         tips['MyOdds'] = np.round(tips['MyOdds'], decimals=2)
-        tips.to_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Tips/'+ datetime.today().strftime("%Y-%m-%d") + '.csv')
+        tips.to_csv('./Tips/'+ datetime.today().strftime("%Y-%m-%d") + '.csv')
         return tips
     else:
         return None
@@ -261,7 +261,7 @@ def send_email():
     server.quit()
 
 def main():
-    schedule = pd.read_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/schedule.csv', index_col=0)
+    schedule = pd.read_csv('schedule.csv', index_col=0)
     team_ratings = read_in_team_ratings()
     #schedule = get_flashscores_schedule()
     if schedule is not None:
