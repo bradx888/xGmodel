@@ -1,6 +1,9 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import datetime
+
+now = datetime.datetime.now()
 
 def myprob(distance, angle):
     x = distance*np.power((angle+1), 0.5)
@@ -75,3 +78,4 @@ ratings = pd.DataFrame({'HomeAttack': home_attack_rating, 'HomeDefense': home_de
 
 ratings.to_csv('teamratings_16-17.csv')
 
+print(datetime.datetime.now()-now)

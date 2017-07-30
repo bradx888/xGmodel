@@ -78,16 +78,16 @@ def predictor(probability_matrix):
     return score
 
 def read_in_fixtures():
-     fixtures = pd.read_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Fixtures/17-18 Fixtures.csv',
+     fixtures = pd.read_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Fixtures/E0/17-18 Fixtures.csv',
                            index_col=0)
 
      return fixtures
 
 def read_in_team_ratings():
-    team_ratings = pd.read_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Team ratings/teamratings_16-17.csv',
+    team_ratings = pd.read_csv('./Team ratings/E0/teamratings_16-17_dixoncoles-moretol.csv',
                            index_col=0)
 
-    championship_team_ratings = pd.read_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Team ratings/championship_teamratings_16-17.csv',
+    championship_team_ratings = pd.read_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Team ratings/E1/championship_teamratings_16-17.csv',
                                         index_col=0)
 
     for column in championship_team_ratings:
