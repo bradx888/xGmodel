@@ -61,10 +61,10 @@ def calculate_win_perc(population, weights):
     return [homeperc, drawperc, awayperc]
 
 def read_in_team_ratings():
-    team_ratings = pd.read_csv('./Team ratings/teamratings_16-17.csv',
+    team_ratings = pd.read_csv('./Team ratings/E0/teamratings_16-17_dixoncoles-moretol.csv',
                            index_col=0)
 
-    championship_team_ratings = pd.read_csv('./Team ratings/championship_teamratings_16-17.csv',
+    championship_team_ratings = pd.read_csv('./Team ratings/E1/championship_teamratings_16-17.csv',
                                         index_col=0)
 
     for column in championship_team_ratings:
@@ -91,7 +91,7 @@ def get_flashscores_schedule():
     soup = BeautifulSoup(htmlSource, 'lxml')
     # find all table headers
     t_heads = soup.find_all('thead')
-    what_league = 'Série C'
+    what_league = 'Premier League'
 
     # check what tournament the thead corresponds to and check it matches the one we want
     for t_head in t_heads:
@@ -120,7 +120,7 @@ def get_flashscores_schedule():
         schedule = pd.DataFrame({'KO': times, 'HomeTeam': home_team, 'AwayTeam': away_team})
 
         # convert FlashScores team names to Football Data team names
-        mappings = pd.read_csv('./Team mappings/flashscores_to_footballdata.csv',
+        mappings = pd.read_csv('./Team mappings/E0/flashscores_to_footballdata.csv',
                                index_col=0, header=None)
         schedule.replace(mappings[1], inplace=True)
     except NameError:
@@ -138,7 +138,7 @@ def get_corresponding_odds(schedule, team_ratings):
         # convert FootballData team names to oddschecker names
         schedule['AwayTeam_OddsName'] = schedule['AwayTeam']
         schedule['HomeTeam_OddsName'] = schedule['HomeTeam']
-        mappings = pd.read_csv('./Team mappings/footballdata_to_oddschecker.csv',
+        mappings = pd.read_csv('./Team mappings/E0/footballdata_to_oddschecker.csv',
                                index_col=0, header=None)
         schedule['AwayTeam_OddsName'].replace(mappings[1], inplace=True)
         schedule['HomeTeam_OddsName'].replace(mappings[1], inplace=True)
@@ -156,13 +156,12 @@ def get_corresponding_odds(schedule, team_ratings):
             home_win = soup.find('tr', {'data-bname': row['HomeTeam']})
             schedule.set_value(index, 'Best_Bookie_H', home_win['data-best-bks'])
             draw = soup.find('tr', {'data-bname': 'Draw'})
+            schedule.set_value(index, 'Best_Bookie_D', draw['data-best-bks'])
             away_win = soup.find('tr', {'data-bname': row['AwayTeam']})
-            home_win = home_win.find('td', {'class': 'bc bs o b'})
-            draw = draw.find('td', {'class': 'bc bs o b'})
-            away_win = away_win.find('td', {'class': 'bc bs o b'})
-            schedule.set_value(index, 'Bookies_H', 1 / float(home_win['data-odig']))
-            schedule.set_value(index, 'Bookies_A', 1 / float(away_win['data-odig']))
-            schedule.set_value(index, 'Bookies_D', 1 / float(draw['data-odig']))
+            schedule.set_value(index, 'Best_Bookie_A', away_win['data-best-bks'])
+            schedule.set_value(index, 'Bookies_H', 1 / float(home_win['data-best-dig']))
+            schedule.set_value(index, 'Bookies_A', 1 / float(away_win['data-best-dig']))
+            schedule.set_value(index, 'Bookies_D', 1 / float(draw['data-best-dig']))
             if row['HomeTeam'] == 'Man Utd' or row['AwayTeam'] == 'Man Utd':
                 home_attack = team_ratings.loc['Man United']['HomeAttack']
                 home_defense = team_ratings.loc['Man United']['HomeDefense']
@@ -184,7 +183,7 @@ def get_corresponding_odds(schedule, team_ratings):
         driver.quit()
         # convert oddschecker team names back to FD team names
         mappings = pd.read_csv(
-            './Team mappings/footballdata_to_oddschecker.csv',
+            './Team mappings/E0/footballdata_to_oddschecker.csv',
             index_col=1, header=None)
         #schedule.replace(mappings[0], inplace=True)
         return schedule
@@ -193,29 +192,30 @@ def get_corresponding_odds(schedule, team_ratings):
 
 def get_tips(schedule):
     if schedule is not None:
+        schedule.to_csv('./Tips/'+ 'ALL__' + datetime.today().strftime("%Y-%m-%d") + '.csv')
         selection, my_odds, b365_odds, home_team, away_team, bookie = [], [], [], [], [], []
         for index, row in schedule.iterrows():
-            if row['Brad_H'] > (row['Bookies_H'] + 0.05) and 1 / row['Brad_H'] < 2.8:
+            if row['Brad_H'] > (row['Bookies_H']) and 1 / row['Brad_H'] < 2.8:
                 selection.append('Home Winner')
                 my_odds.append(1 / row['Brad_H'])
                 b365_odds.append(1 / row['Bookies_H'])
                 home_team.append(row['HomeTeam'])
                 away_team.append(row['AwayTeam'])
                 bookie.append(row['Best_Bookie_H'])
-            if row['Brad_D'] > (row['Bookies_D'] + 0.05) and 1 / row['Brad_D'] < 2.8:
+            if row['Brad_D'] > (row['Bookies_D']) and 1 / row['Brad_D'] < 2.8:
                 selection.append('Draw')
                 my_odds.append(1 / row['Brad_D'])
                 b365_odds.append(1 / row['Bookies_D'])
                 home_team.append(row['HomeTeam'])
                 away_team.append(row['AwayTeam'])
-                bookie.append(row['Best_Bookie_H'])
-            if row['Brad_A'] > (row['Bookies_A'] + 0.05) and 1 / row['Brad_A'] < 2.8:
+                bookie.append(row['Best_Bookie_D'])
+            if row['Brad_A'] > (row['Bookies_A']) and 1 / row['Brad_A'] < 2.8:
                 selection.append('Away Winner')
                 my_odds.append(1 / row['Brad_A'])
                 b365_odds.append(1 / row['Bookies_A'])
                 home_team.append(row['HomeTeam'])
                 away_team.append(row['AwayTeam'])
-                bookie.append(row['Best_Bookie_H'])
+                bookie.append(row['Best_Bookie_A'])
 
         tips = pd.DataFrame({'Selection': selection, 'MyOdds': my_odds,
                              'Bookies Odds': b365_odds, 'HomeTeam': home_team,
@@ -227,7 +227,7 @@ def get_tips(schedule):
     else:
         return None
 
-def send_email():
+def send_tips():
     gmail_username = "automatedtransactionsbg@gmail.com"
     gmail_password = "Z1s$ASuo#2NE"
     toaddr = 'bgrantham343@gmail.com'
@@ -260,6 +260,39 @@ def send_email():
     server.sendmail(gmail_username, toaddr, msg.as_string())
     server.quit()
 
+def send_all():
+    gmail_username = "automatedtransactionsbg@gmail.com"
+    gmail_password = "Z1s$ASuo#2NE"
+    toaddr = 'bgrantham343@gmail.com'
+    msg = MIMEMultipart()
+
+    # set the to and from address as well as the subject
+    msg['From'] = gmail_username
+    msg['To'] = toaddr
+    msg['Subject'] = 'Premier League Tips for ' + datetime.today().strftime("%Y-%m-%d") + '\n\n'
+
+    # write the number of days
+    body = 'Bet wisely, young one'
+    msg.attach(MIMEText(body, 'plain'))
+
+    # attach a csv of the transactions
+
+    filename = './Tips/' + 'ALL__' + datetime.today().strftime("%Y-%m-%d") + '.csv'
+    f = open(filename, 'r')
+    attachment = MIMEText(f.read())
+    attachment.add_header('Content-Disposition', 'attachment', filename=filename)
+    msg.attach(attachment)
+
+    # set up the server, send the email and then quit
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.ehlo()
+    server.starttls()
+
+    server.login(gmail_username, gmail_password)
+
+    server.sendmail(gmail_username, toaddr, msg.as_string())
+    server.quit()
+
 def main():
     schedule = pd.read_csv('schedule.csv', index_col=0)
     team_ratings = read_in_team_ratings()
@@ -267,7 +300,9 @@ def main():
     if schedule is not None:
         schedule = get_corresponding_odds(schedule, team_ratings)
         get_tips(schedule)
-        send_email()
+        send_tips()
+        send_all()
+        schedule.to_csv('testing.csv')
     else:
         pass
 

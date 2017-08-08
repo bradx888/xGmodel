@@ -4,16 +4,16 @@ import csv
 import pandas as pd
 
 missed_data = pd.read_csv('missed_matches.csv')
-
-# missed_data = [200, 217, 359]
-
-missed_data = list(missed_data["MatchNo"])
-
+#
+missed_data = [442]
+#
+#missed_data = list(missed_data["Match No"])
+#
 matches =[]
 
 
 
-with open('16-17 Fixtures.csv') as csvfile:
+with open('16-17 fixtures.csv') as csvfile:
 	reader = csv.DictReader(csvfile)
 	for row in reader:
 		matches.append([row['HomeTeam'], row['AwayTeam'], row['Date']])
@@ -22,12 +22,16 @@ with open('16-17 Fixtures.csv') as csvfile:
 chromedriver = "/Users/BradleyGrantham/Documents/Chromedriver/chromedriver"
 driver = webdriver.Chrome(chromedriver)
 
-with open('shots1617_MissedInBigScrape2.csv', 'w') as csvfile:
+with open('shots_missed5.csv', 'w') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(['x', 'y', 'Team', 'Against', 'Scored', 'Match No', 'Date'])
+    #for i in range(0, len(matches)):
     for i in missed_data:
+        print(matches[i])
+        print('http://championship.squawka.com/english-football-league-championship/' + matches[i][2] + '/' + matches[i][0] + '-vs-' +
+            matches[i][1] + '/matches')
         driver.get(
-            'http://epl.squawka.com/english-premier-league/' + matches[i][2] + '/' + matches[i][0] + '-vs-' +
+            'http://championship.squawka.com/english-football-league-championship/' + matches[i][2] + '/' + matches[i][0] + '-vs-' +
             matches[i][1] + '/matches')
         try:
 

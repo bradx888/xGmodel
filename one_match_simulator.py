@@ -53,13 +53,20 @@ def calculate_win_perc(population, weights):
             awayperc += weights[i]
     return [homeperc, drawperc, awayperc]
 
+def calculate_goal_line(population, weights):
+    result = 0
+    for i in range(0, len(population)):
+        if population[i][0] + population[i][1] > 2:
+            result += weights[i]
 
-fixtures = pd.read_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/17-18 Fixtures.csv',
-                       index_col=0)
-team_ratings = pd.read_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Team ratings/teamratings_16-17.csv',
+    return result
+
+
+
+team_ratings = pd.read_csv('./Team ratings/E0/teamratings_16-17_dixoncoles-moretol.csv',
                            index_col=0)
 
-championship_team_ratings = pd.read_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Team ratings/championship_teamratings_16-17.csv',
+championship_team_ratings = pd.read_csv('./Team ratings/E1/championship_teamratings_16-17.csv',
                                         index_col=0)
 
 for column in championship_team_ratings:
@@ -82,10 +89,11 @@ away_defense = team_ratings.loc[away_team]['AwayDefense']
 population, weights = bivpois2(home_attack*away_defense, away_attack*home_defense, 0.15)
 
 percentages = calculate_win_perc(population, weights)
+goal_line = calculate_goal_line(population, weights)
 
 print(home_team, 1/percentages[0])
 print('Draw', 1/percentages[1])
 print(away_team, 1/percentages[2])
-print(sum(percentages))
+print('O 2.5', 1/goal_line)
 
 

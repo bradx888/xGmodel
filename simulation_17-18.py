@@ -87,7 +87,7 @@ def read_in_team_ratings():
     team_ratings = pd.read_csv('./Team ratings/E0/teamratings_16-17_dixoncoles-moretol.csv',
                            index_col=0)
 
-    championship_team_ratings = pd.read_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Team ratings/E1/championship_teamratings_16-17.csv',
+    championship_team_ratings = pd.read_csv('./Team ratings/E1/championship_teamratings_16-17.csv',
                                         index_col=0)
 
     for column in championship_team_ratings:
@@ -103,13 +103,17 @@ def read_in_team_ratings():
 def iterator(fixtures, team_ratings):
     teams = set(list(fixtures['HomeTeam']))
 
-    mc_iterations = 1000
+    mc_iterations = 10000
 
     total_points = dict.fromkeys(teams, 0)
     goals = dict.fromkeys(teams, 0)
     winnercount = dict.fromkeys(teams, 0)
     relegationcount = dict.fromkeys(teams, 0)
     top4count = dict.fromkeys(teams, 0)
+    wincount = dict.fromkeys(teams, 0)
+    drawcount = dict.fromkeys(teams, 0)
+    losscount = dict.fromkeys(teams, 0)
+
 
     population = dict()
     weights = dict()
@@ -128,11 +132,17 @@ def iterator(fixtures, team_ratings):
             # print(score)
             if score[0] > score[1]:
                 points[row['HomeTeam']] += 3
+                wincount[row['HomeTeam']] += 1
+                losscount[row['AwayTeam']] += 1
             elif score[0] == score[1]:
                 points[row['HomeTeam']] += 1
                 points[row['AwayTeam']] += 1
+                drawcount[row['HomeTeam']] += 1
+                drawcount[row['AwayTeam']] += 1
             elif score[0] < score[1]:
                 points[row['AwayTeam']] += 3
+                wincount[row['AwayTeam']] += 1
+                losscount[row['HomeTeam']] += 1
             goals[row['HomeTeam']] += score[0]
             goals[row['AwayTeam']] += score[1]
             # print(row['HomeTeam'], row['AwayTeam'], score)
@@ -148,7 +158,7 @@ def iterator(fixtures, team_ratings):
             points.drop([points.idxmin(), points.idxmax()], axis=0, inplace=True)
 
     results = pd.DataFrame(
-        {'Points': total_points, 'Goals': goals, '%Title': winnercount, '%Top4': top4count, '%Releg': relegationcount})
+        {'Wins': wincount, 'Draws': drawcount, 'Losses': losscount, 'Points': total_points, 'Goals': goals, '%Title': winnercount, '%Top4': top4count, '%Releg': relegationcount})
     for column in results:
         if '%' in column:
             results[column] = np.round((results[column] / mc_iterations) * 100, decimals=2)
