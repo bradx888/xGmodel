@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from selenium import webdriver
+from pyvirtualdisplay import Display
 import time
 from bs4 import BeautifulSoup
 import math
@@ -92,10 +93,14 @@ def get_flashscores_schedule():
     # initialise chromedriver
     chromedriver = "/Users/BradleyGrantham/Documents/Chromedriver/chromedriver"
     driver = webdriver.Chrome(chromedriver)
+    # display = Display(visible=0, size=(1024,768))
+    # display.start()
+    # driver = webdriver.Firefox()
     driver.get(my_url)
     # time.sleep(1)
     htmlSource = driver.page_source
     driver.quit()
+    # display.stop()
 
     soup = BeautifulSoup(htmlSource, 'lxml')
     # find all table headers
@@ -144,6 +149,9 @@ def get_corresponding_odds(schedule, team_ratings):
     if schedule is not None:
         chromedriver = "/Users/BradleyGrantham/Documents/Chromedriver/chromedriver"
         driver = webdriver.Chrome(chromedriver)
+        # display = Display(visible=0, size=(1024,768))
+        # display.start()
+        # driver = webdriver.Firefox()
         # convert FootballData team names to oddschecker names
         schedule['AwayTeam_OddsName'] = schedule['AwayTeam']
         schedule['HomeTeam_OddsName'] = schedule['HomeTeam']
@@ -190,6 +198,7 @@ def get_corresponding_odds(schedule, team_ratings):
             schedule.set_value(index, 'Brad_D', percentages[1])
 
         driver.quit()
+        # display.stop()
         # convert oddschecker team names back to FD team names
         mappings = pd.read_csv(
             './Team mappings/E0/footballdata_to_oddschecker.csv',
