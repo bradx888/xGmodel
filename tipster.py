@@ -5,6 +5,7 @@ import time
 from bs4 import BeautifulSoup
 import math
 from datetime import datetime
+from datetime import timedelta
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -77,6 +78,14 @@ def read_in_team_ratings():
 
     return team_ratings
 
+def read_in_fixtures():
+    data = pd.read_csv(
+        './Fixtures/E0/17-18 Fixtures.csv',
+        index_col=0)
+    data['Date'] = pd.to_datetime(data['Date'], format='%d %b %Y')
+    data = data[data.Date < datetime.today() + timedelta(days=7)]
+    return data
+
 def get_flashscores_schedule():
     my_url = 'http://www.flashscores.co.uk/football/'
 
@@ -91,11 +100,11 @@ def get_flashscores_schedule():
     soup = BeautifulSoup(htmlSource, 'lxml')
     # find all table headers
     t_heads = soup.find_all('thead')
-    what_league = 'Premier League'
 
     # check what tournament the thead corresponds to and check it matches the one we want
     for t_head in t_heads:
-        if t_head.find_all('span', {'class', 'tournament_part'})[0].text == what_league:
+        if t_head.find_all('span', {'class', 'tournament_part'})[0].text == 'Premier League' \
+                and t_head.find_all('span', {'class', 'country_part'})[0].text == 'ENGLAND':
             matches = t_head.next_sibling
 
     # use a try because there may not be any games today
@@ -190,9 +199,8 @@ def get_corresponding_odds(schedule, team_ratings):
     else:
         return None
 
-def get_tips(schedule):
+def get_tips(schedule, boolean):
     if schedule is not None:
-        schedule.to_csv('./Tips/'+ 'ALL__' + datetime.today().strftime("%Y-%m-%d") + '.csv')
         selection, my_odds, b365_odds, home_team, away_team, bookie = [], [], [], [], [], []
         for index, row in schedule.iterrows():
             if row['Brad_H'] > (row['Bookies_H']) and 1 / row['Brad_H'] < 2.8:
@@ -222,8 +230,11 @@ def get_tips(schedule):
                              'AwayTeam': away_team, 'Bookie': bookie}).reindex_axis(['HomeTeam', 'AwayTeam', 'Selection',
                                                                    'MyOdds', 'Bookies Odds', 'Bookie'], axis=1)
         tips['MyOdds'] = np.round(tips['MyOdds'], decimals=2)
-        tips.to_csv('./Tips/'+ datetime.today().strftime("%Y-%m-%d") + '.csv')
-        return tips
+        if boolean == '7days':
+            tips.to_csv('./Tips/7 Day Forecast/' + datetime.today().strftime("%Y-%m-%d") + '.csv')
+        else:
+            tips.to_csv('./Tips/Daily/'+ datetime.today().strftime("%Y-%m-%d") + '.csv')
+        #return tips
     else:
         return None
 
@@ -277,7 +288,7 @@ def send_all():
 
     # attach a csv of the transactions
 
-    filename = './Tips/' + 'ALL__' + datetime.today().strftime("%Y-%m-%d") + '.csv'
+    filename = './Tips/7 Day Forecast/' + datetime.today().strftime("%Y-%m-%d") + '.csv'
     f = open(filename, 'r')
     attachment = MIMEText(f.read())
     attachment.add_header('Content-Disposition', 'attachment', filename=filename)
@@ -294,15 +305,16 @@ def send_all():
     server.quit()
 
 def main():
-    schedule = pd.read_csv('schedule.csv', index_col=0)
+    next7days_schedule = read_in_fixtures()
     team_ratings = read_in_team_ratings()
-    #schedule = get_flashscores_schedule()
-    if schedule is not None:
-        schedule = get_corresponding_odds(schedule, team_ratings)
-        get_tips(schedule)
+    todays_schedule = get_flashscores_schedule()
+    next7days_schedule = get_corresponding_odds(next7days_schedule, team_ratings)
+    get_tips(next7days_schedule, '7days')
+    send_all()
+    if todays_schedule is not None:
+        todays_schedule = get_corresponding_odds(todays_schedule, team_ratings)
+        get_tips(todays_schedule, 'Today')
         send_tips()
-        send_all()
-        schedule.to_csv('testing.csv')
     else:
         pass
 
