@@ -100,10 +100,9 @@ def read_in_team_ratings():
 
     return team_ratings
 
-def iterator(fixtures, team_ratings):
-    teams = set(list(fixtures['HomeTeam']))
+def iterator(fixtures, team_ratings, mc_iterations):
 
-    mc_iterations = 10000
+    teams = set(list(fixtures['HomeTeam']))
 
     total_points = dict.fromkeys(teams, 0)
     goals = dict.fromkeys(teams, 0)
@@ -144,7 +143,9 @@ def iterator(fixtures, team_ratings):
                 wincount[row['AwayTeam']] += 1
                 losscount[row['HomeTeam']] += 1
             goals[row['HomeTeam']] += score[0]
+            goals[row['HomeTeam']] -= score[1]
             goals[row['AwayTeam']] += score[1]
+            goals[row['AwayTeam']] -= score[0]
             # print(row['HomeTeam'], row['AwayTeam'], score)
         for team in teams:
             total_points[team] += points[team]
@@ -158,14 +159,16 @@ def iterator(fixtures, team_ratings):
             points.drop([points.idxmin(), points.idxmax()], axis=0, inplace=True)
 
     results = pd.DataFrame(
-        {'Wins': wincount, 'Draws': drawcount, 'Losses': losscount, 'Points': total_points, 'Goals': goals, '%Title': winnercount, '%Top4': top4count, '%Releg': relegationcount})
+        {'W': wincount, 'D': drawcount, 'L': losscount, 'Pts': total_points, 'GD': goals, '%Title': winnercount, '%Top4': top4count, '%Releg': relegationcount})
     for column in results:
         if '%' in column:
             results[column] = np.round((results[column] / mc_iterations) * 100, decimals=2)
         else:
             results[column] = np.round((results[column] / mc_iterations), decimals=2)
 
-    results.sort_values('Points', ascending=False, inplace=True)
+    results.sort_values('Pts', ascending=False, inplace=True)
+    cols = ['W', 'D', 'L', 'Pts', 'GD', '%Title', '%Top4', '%Releg']
+    results = results[cols]
     return results
 
 now = datetime.datetime.now() # for measuring the time taken
@@ -173,8 +176,8 @@ now = datetime.datetime.now() # for measuring the time taken
 fixtures = read_in_fixtures()
 team_ratings = read_in_team_ratings()
 
-results = iterator(fixtures, team_ratings)
+results = iterator(fixtures, team_ratings, 10000)
 
-results.to_csv('testingtesting.csv')
+results.to_csv('./Table Predictions/E0/' + datetime.datetime.today().strftime("%Y-%m-%d") + '.csv')
 
 print(datetime.datetime.now()-now) # for measuring the time taken
