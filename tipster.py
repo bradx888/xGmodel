@@ -109,7 +109,7 @@ def get_flashscores_schedule():
     # check what tournament the thead corresponds to and check it matches the one we want
     for t_head in t_heads:
         if t_head.find_all('span', {'class', 'tournament_part'})[0].text == 'Premier League' \
-                and t_head.find_all('span', {'class', 'country_part'})[0].text == 'ENGLAND':
+                and t_head.find_all('span', {'class', 'country_part'})[0].text == 'ENGLAND: ':
             matches = t_head.next_sibling
 
     # use a try because there may not be any games today
@@ -256,7 +256,7 @@ def send_tips():
     # set the to and from address as well as the subject
     msg['From'] = gmail_username
     msg['To'] = toaddr
-    msg['Subject'] = 'Premier League Tips for ' + datetime.today().strftime("%Y-%m-%d") + '\n\n'
+    msg['Subject'] = 'Todays PL Tips for ' + datetime.today().strftime("%Y-%m-%d") + '\n\n'
 
     # write the number of days
     body = 'Bet wisely, young one'
@@ -264,7 +264,7 @@ def send_tips():
 
     # attach a csv of the transactions
 
-    filename = './Tips/'+ datetime.today().strftime("%Y-%m-%d") + '.csv'
+    filename = './Tips/Daily/'+ datetime.today().strftime("%Y-%m-%d") + '.csv'
     f = open(filename, 'r')
     attachment = MIMEText(f.read())
     attachment.add_header('Content-Disposition', 'attachment', filename=filename)
@@ -289,7 +289,7 @@ def send_all():
     # set the to and from address as well as the subject
     msg['From'] = gmail_username
     msg['To'] = toaddr
-    msg['Subject'] = 'Premier League Tips for ' + datetime.today().strftime("%Y-%m-%d") + '\n\n'
+    msg['Subject'] = 'PL Tips for next 7 days' + '\n\n'
 
     # write the number of days
     body = 'Bet wisely, young one'
