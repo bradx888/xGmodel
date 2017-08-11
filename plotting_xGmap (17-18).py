@@ -4,16 +4,47 @@ import matplotlib.pyplot as plt
 import matplotlib.patheffects as path_effects
 from scipy.misc import imread
 
-data = pd.read_csv('./All shots from 16-17/E0/shots with proba.csv', index_col=0)
-football_data = pd.read_csv('./Football-data.co.uk/E0/16-17 with xG exponential.csv', index_col=0)
-mappings = pd.read_csv('./All shots from 16-17/E0/mappings.csv', index_col=1, header=None)
+def myprob(distance, angle):
+    x = distance*np.power((angle+1), 0.5)
+    result = 1.0646383882981121*np.exp(-0.0247111*x)
+    return result
+
+def tidy_data(shot_data):
+    for index, row in shot_data.iterrows():
+        if row['x'] > 240:
+            shot_data.set_value(index, 'x', 480 - row['x'])
+
+    shot_data['y'] = shot_data['y'] - 366/2
+    # calculate the angle and the distance from the goal
+    shot_data['Angle'] = np.arctan((np.absolute(shot_data['y'])/shot_data['x']))
+    shot_data['Distance'] = np.sqrt(shot_data['y']*shot_data['y'] + shot_data['x']*shot_data['x'])
+
+    # assign colours and numbers based on whether the shots were scored or missed
+    for index, row in shot_data.iterrows():
+        if row['Scored'] == 'Scored':
+            shot_data.set_value(index, 'Colour', 'b')
+            shot_data.set_value(index, 'ScoredBinary', 1)
+        else:
+            shot_data.set_value(index, 'Colour', 'r')
+            shot_data.set_value(index, 'ScoredBinary', 0)
+
+    shot_data['Proba_exp'] = myprob(shot_data['Distance'], shot_data['Angle'])
+
+    return shot_data
+
+
+data = pd.read_csv('./All shots from 17-18/E0/shots.csv')
+football_data = pd.read_csv('./Football-data.co.uk/E0/17-18.csv')
+mappings = pd.read_csv('./All shots from 17-18/E0/mappings.csv', index_col=1, header=None)
 data.replace(mappings[0], inplace=True)
 img = imread('./xG Plots/background.jpg')
 
 home_team = input('Input home team: ')
 away_team = input('Input away team: ')
 
-football_data['Date'] = pd.to_datetime(football_data['Date'], format='%d/%m/%y')
+data = tidy_data(data)
+
+football_data['Date'] = pd.to_datetime(football_data['Date'], format='%d/%m/%Y')
 
 for index, row in football_data.iterrows():
     if row['HomeTeam'] == home_team and row['AwayTeam'] == away_team:
@@ -54,3 +85,4 @@ text.set_path_effects([path_effects.Stroke(linewidth=1, foreground='black'),
 plt.axis('off')
 plt.savefig('./xG Plots/' + home_team + '-' + away_team + ' ' + date.strftime("%Y-%m-%d") + '.png',
             bbox_inches='tight')
+
