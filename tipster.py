@@ -79,13 +79,29 @@ def read_in_team_ratings():
 
     return team_ratings
 
-def read_in_fixtures():
-    data = pd.read_csv(
-        './Fixtures/E0/17-18 Fixtures.csv',
-        index_col=0)
-    data['Date'] = pd.to_datetime(data['Date'], format='%d %b %Y')
-    data = data[data.Date < datetime.today() + timedelta(days=7)]
-    return data
+def read_in_fixtures(todays_schedule):
+    if todays_schedule is not None:
+        data = pd.read_csv(
+            './Fixtures/E0/Remaining 17-18 Fixtures.csv',
+            index_col=0)
+        to_drop = []
+        for index, row in todays_schedule.iterrows():
+            for index1, row1 in data.iterrows():
+                if row['HomeTeam'] == row1['HomeTeam'] and row['AwayTeam'] == row1['AwayTeam']:
+                    to_drop.append(index1)
+        data.drop(to_drop, axis=0, inplace=True)
+        data.to_csv('./Fixtures/E0/Remaining 17-18 Fixtures.csv')
+        data['Date'] = pd.to_datetime(data['Date'], format='%d-%b-%y')
+        data = data[data.Date < datetime.today() + timedelta(days=7)]
+        return data
+    else:
+        data = pd.read_csv(
+            './Fixtures/E0/Remaining 17-18 Fixtures.csv',
+            index_col=0)
+        data['Date'] = pd.to_datetime(data['Date'], format='%d-%b-%y')
+        data = data[data.Date < datetime.today() + timedelta(days=7)]
+        # data.to_csv('./Fixtures/E0/Remaining 17-18 Fixtures.csv')
+        return data
 
 def get_flashscores_schedule():
     my_url = 'http://www.flashscores.co.uk/football/'
@@ -163,6 +179,7 @@ def get_corresponding_odds(schedule, team_ratings):
         for index, row in schedule.iterrows():
             my_url = 'https://www.oddschecker.com/football/english/premier-league/' + row['HomeTeam_OddsName'] + '-v-' + row[
                 'AwayTeam_OddsName'] + '/winner'
+            # print(my_url)
             driver.get(my_url)
             try:
                 driver.find_element_by_xpath('//*[@id="promo-modal"]/div[1]/div/span').click()
@@ -179,11 +196,16 @@ def get_corresponding_odds(schedule, team_ratings):
             schedule.set_value(index, 'Bookies_H', 1 / float(home_win['data-best-dig']))
             schedule.set_value(index, 'Bookies_A', 1 / float(away_win['data-best-dig']))
             schedule.set_value(index, 'Bookies_D', 1 / float(draw['data-best-dig']))
-            if row['HomeTeam'] == 'Man Utd' or row['AwayTeam'] == 'Man Utd':
+            if row['HomeTeam'] == 'Man Utd':
                 home_attack = team_ratings.loc['Man United']['HomeAttack']
                 home_defense = team_ratings.loc['Man United']['HomeDefense']
                 away_attack = team_ratings.loc[row['AwayTeam']]['AwayAttack']
                 away_defense = team_ratings.loc[row['AwayTeam']]['AwayDefense']
+            elif row['AwayTeam'] == 'Man Utd':
+                home_attack = team_ratings.loc[row['HomeTeam']]['HomeAttack']
+                home_defense = team_ratings.loc[row['HomeTeam']]['HomeDefense']
+                away_attack = team_ratings.loc['Man United']['AwayAttack']
+                away_defense = team_ratings.loc['Man United']['AwayDefense']
             else:
                 home_attack = team_ratings.loc[row['HomeTeam']]['HomeAttack']
                 home_defense = team_ratings.loc[row['HomeTeam']]['HomeDefense']
@@ -313,10 +335,13 @@ def send_all():
     server.sendmail(gmail_username, toaddr, msg.as_string())
     server.quit()
 
+def delete_todays_fixtures(todays_schedule):
+    pass
+
 def main():
-    next7days_schedule = read_in_fixtures()
-    team_ratings = read_in_team_ratings()
     todays_schedule = get_flashscores_schedule()
+    next7days_schedule = read_in_fixtures(todays_schedule)
+    team_ratings = read_in_team_ratings()
     next7days_schedule = get_corresponding_odds(next7days_schedule, team_ratings)
     get_tips(next7days_schedule, '7days')
     send_all()
@@ -326,6 +351,8 @@ def main():
         send_tips()
     else:
         pass
+
+
 
 # schedule.every().day.at("19:55").do(main)
 #

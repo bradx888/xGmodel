@@ -1,14 +1,6 @@
 ,AwayTeam,Date,HomeTeam
-0,Leicester,12-Aug-17,Arsenal
-1,Man City,12-Aug-17,Brighton
-2,Burnley,12-Aug-17,Chelsea
-3,Huddersfield,12-Aug-17,Crystal Palace
-4,Stoke,12-Aug-17,Everton
 5,West Ham,12-Aug-17,Man United
 6,Tottenham,12-Aug-17,Newcastle
-7,Swansea,12-Aug-17,Southampton
-8,Liverpool,12-Aug-17,Watford
-9,Bournemouth,12-Aug-17,West Brom
 10,Watford,19-Aug-17,Bournemouth
 11,West Brom,19-Aug-17,Burnley
 12,Newcastle,19-Aug-17,Huddersfield
@@ -18,7 +10,7 @@
 16,Arsenal,19-Aug-17,Stoke
 17,Man United,19-Aug-17,Swansea
 18,Chelsea,19-Aug-17,Tottenham
-19,Southampton,19-Aug-17,West Ham
+19,West Ham,19-Aug-17,Southampton
 20,Man City,26-Aug-17,Bournemouth
 21,Everton,26-Aug-17,Chelsea
 22,Swansea,26-Aug-17,Crystal Palace
@@ -317,7 +309,6 @@
 315,Swansea,31-Mar-18,Man United
 316,Huddersfield,31-Mar-18,Newcastle
 317,West Ham,31-Mar-18,Southampton
-318,Bournemouth,31-Mar-18,Watford
 319,Burnley,31-Mar-18,West Brom
 320,Southampton,07-Apr-18,Arsenal
 321,Crystal Palace,07-Apr-18,Bournemouth
