@@ -34,7 +34,7 @@ def tidy_data(shot_data):
     return shot_data
 
 
-data = pd.read_csv('./All shots from 17-18/E0/shots.csv')
+data = pd.read_csv('./All shots from 17-18/E0/shots.csv', index_col=0)
 football_data = pd.read_csv('./Football-data.co.uk/E0/17-18.csv')
 mappings = pd.read_csv('./All shots from 17-18/E0/mappings.csv', index_col=1, header=None)
 data.replace(mappings[0], inplace=True)

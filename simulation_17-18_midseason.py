@@ -98,8 +98,10 @@ def read_in_team_ratings():
 
     team_ratings = team_ratings.append(championship_team_ratings)
 
+    ''' the following code updates the team ratings based on this seasons current results'''
+
     new_data = pd.read_csv(
-        './Football-data.co.uk/E0/16-17 with xG exponential.csv'
+        './Football-data.co.uk/E0/17-18.csv'
     )
 
     new_home_attack = new_data.groupby('HomeTeam')['xGH'].mean()
@@ -117,24 +119,28 @@ def read_in_team_ratings():
                              'AwayAttack': new_away_attack, 'AwayAttackCount': new_away_attack_count,
                              'AwayDefense': new_away_defense, 'AwayDefenseCount': new_away_defense_count})
 
+    new_data.replace(np.NaN, 0.0, inplace=True)
+
     # REGRESSION TO TURN THESE INTO PARAMETERS
     new_data = xG_to_teamratings(new_data)
+
+    exp_factor = 0.08
 
     for col in new_data:
         if 'Count' in col:
             pass
         else:
-            new_data[col] = new_data[col] * (1 - np.exp(-0.1*new_data[col + 'Count']))
+            new_data[col] = new_data[col] * (1 - np.exp(-exp_factor*new_data[col + 'Count']))
 
     for index, row in new_data.iterrows():
         team_ratings.set_value(index, 'HomeAttack',
-                               team_ratings.ix[index, 'HomeAttack'] * np.exp(-0.1 * row['HomeAttackCount']))
+                               team_ratings.ix[index, 'HomeAttack'] * np.exp(-exp_factor * row['HomeAttackCount']))
         team_ratings.set_value(index, 'AwayAttack',
-                               team_ratings.ix[index, 'AwayAttack'] * np.exp(-0.1 * row['AwayAttackCount']))
+                               team_ratings.ix[index, 'AwayAttack'] * np.exp(-exp_factor * row['AwayAttackCount']))
         team_ratings.set_value(index, 'HomeDefense',
-                               team_ratings.ix[index, 'HomeDefense'] * np.exp(-0.1 * row['HomeDefenseCount']))
+                               team_ratings.ix[index, 'HomeDefense'] * np.exp(-exp_factor * row['HomeDefenseCount']))
         team_ratings.set_value(index, 'AwayDefense',
-                               team_ratings.ix[index, 'AwayDefense'] * np.exp(-0.1 * row['AwayDefenseCount']))
+                               team_ratings.ix[index, 'AwayDefense'] * np.exp(-exp_factor * row['AwayDefenseCount']))
 
     for index, row in new_data.iterrows():
         new_data.set_value(index, 'HomeAttack', team_ratings.ix[index, 'HomeAttack'] + row['HomeAttack'])
@@ -148,7 +154,7 @@ def read_in_team_ratings():
                    'AwayDefenseCount'
                    ], axis=1 ,inplace=True)
 
-
+    new_data.to_csv('./Team ratings/E0/teamratings_17-18.csv')
     return new_data
 
 def xG_to_teamratings(data):
@@ -268,17 +274,15 @@ def calculate_current_table(fixtures):
     results = pd.DataFrame({'Points': points, 'Wins': wincount, 'Draws': drawcount, 'Losses': losscount, 'GD': goals})
     return results
 
-# now = datetime.datetime.now() # for measuring the time taken
-#
-# remaining_fixtures = read_in_fixtures()
-# team_ratings = read_in_team_ratings()
-#
-# current_table = calculate_current_table(remaining_fixtures)
-#
-# results = iterator(remaining_fixtures, team_ratings, current_table, 1000)
-#
-# results.to_csv('./Table Predictions/E0/' + datetime.datetime.today().strftime("%Y-%m-%d") + '.csv')
-#
-# print(datetime.datetime.now()-now) # for measuring the time taken
+now = datetime.datetime.now() # for measuring the time taken
 
-print(read_in_team_ratings())
+remaining_fixtures = read_in_fixtures()
+team_ratings = read_in_team_ratings()
+
+current_table = calculate_current_table(remaining_fixtures)
+
+results = iterator(remaining_fixtures, team_ratings, current_table, 100)
+
+results.to_csv('./Table Predictions/E0/' + datetime.datetime.today().strftime("%Y-%m-%d") + '.csv')
+
+print(datetime.datetime.now()-now) # for measuring the time taken

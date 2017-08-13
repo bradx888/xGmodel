@@ -340,9 +340,6 @@ def send_all():
     server.sendmail(gmail_username, toaddr, msg.as_string())
     server.quit()
 
-def delete_todays_fixtures(todays_schedule):
-    pass
-
 def main():
     todays_schedule = get_flashscores_schedule()
     next7days_schedule = read_in_fixtures(todays_schedule)
@@ -365,5 +362,5 @@ def main():
 #     schedule.run_pending()
 #     time.sleep(1)
 
-#main()
+main()
 
