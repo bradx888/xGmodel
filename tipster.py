@@ -12,6 +12,11 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import schedule
 
+def myprob(distance, angle):
+    x = distance*np.power((angle+1), 0.5)
+    result = 1.0646383882981121*np.exp(-0.0247111*x)
+    return result
+
 def promoted_teams_attack(old_param):
     parameter = 0.53683956207924333 * old_param + 0.049598077388848139
     return parameter
@@ -179,7 +184,7 @@ def get_corresponding_odds(schedule, team_ratings):
         for index, row in schedule.iterrows():
             my_url = 'https://www.oddschecker.com/football/english/premier-league/' + row['HomeTeam_OddsName'] + '-v-' + row[
                 'AwayTeam_OddsName'] + '/winner'
-            # print(my_url)
+            print(my_url)
             driver.get(my_url)
             try:
                 driver.find_element_by_xpath('//*[@id="promo-modal"]/div[1]/div/span').click()
@@ -360,4 +365,5 @@ def main():
 #     schedule.run_pending()
 #     time.sleep(1)
 
-main()
+#main()
+

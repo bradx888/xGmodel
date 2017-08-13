@@ -15,6 +15,7 @@ def tidy_data(shot_data):
             shot_data.set_value(index, 'x', 480 - row['x'])
 
     shot_data['y'] = shot_data['y'] - 366/2
+    shot_data['y'] = shot_data['y'] * -1
     # calculate the angle and the distance from the goal
     shot_data['Angle'] = np.arctan((np.absolute(shot_data['y'])/shot_data['x']))
     shot_data['Distance'] = np.sqrt(shot_data['y']*shot_data['y'] + shot_data['x']*shot_data['x'])
@@ -75,14 +76,10 @@ text = plt.text(240, 120, home_team + ' vs. ' + away_team + '\n'
          + 'Score: ' + str(home_goals) + '  -  ' + str(away_goals) + '\n'
          + 'xG: ' + str(np.round(xG_home,2)) + '  -  ' + str(np.round(xG_away,2)), horizontalalignment='center',
          color='gold', fontsize=10, fontweight='bold')
-# plt.text(240, 130, 'Score: ' + str(home_goals) + '  -  ' + str(away_goals), horizontalalignment='center',
-#          color='gold', fontsize=10, fontweight='bold')
-# plt.text(240, 110, 'xG: ' + str(np.round(xG_home,2)) + '  -  ' + str(np.round(xG_away,2)), horizontalalignment='center',
-#          color='gold', fontsize=10, fontweight='bold')
 text.set_path_effects([path_effects.Stroke(linewidth=1, foreground='black'),
                        path_effects.Normal()])
 
 plt.axis('off')
-plt.savefig('./xG Plots/' + home_team + '-' + away_team + ' ' + date.strftime("%Y-%m-%d") + '.png',
+plt.savefig('./xG Plots/17-18/' + home_team + '-' + away_team + ' ' + date.strftime("%Y-%m-%d") + '.png',
             bbox_inches='tight')
 
