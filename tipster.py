@@ -73,10 +73,10 @@ def calculate_win_perc(population, weights):
     return [homeperc, drawperc, awayperc]
 
 def read_in_team_ratings():
-    team_ratings = pd.read_csv('./Team ratings/E0/teamratings_16-17_dixoncoles-moretol.csv',
+    team_ratings = pd.read_csv('./Team ratings/E0/teamratings_16-17.csv',
                            index_col=0)
 
-    championship_team_ratings = pd.read_csv('./Team ratings/E1/championship_teamratings_16-17.csv',
+    championship_team_ratings = pd.read_csv('./Team ratings/E1/teamratings_16-17.csv',
                                         index_col=0)
 
     for column in championship_team_ratings:
@@ -87,7 +87,78 @@ def read_in_team_ratings():
 
     team_ratings = team_ratings.append(championship_team_ratings)
 
-    return team_ratings
+    ''' the following code updates the team ratings based on this seasons current results'''
+
+    new_data = pd.read_csv(
+        './Football-data.co.uk/E0/17-18.csv'
+    )
+
+    new_home_attack = 0.8*new_data.groupby('HomeTeam')['xGH'].mean() + 0.2*new_data.groupby('HomeTeam')['FTHG'].mean()
+    new_home_attack_count = new_data.groupby('HomeTeam')['xGH'].count()
+    new_home_defense = 0.8*new_data.groupby('HomeTeam')['xGA'].mean() + 0.2*new_data.groupby('HomeTeam')['FTAG'].mean()
+    new_home_defense_count = new_data.groupby('HomeTeam')['xGA'].count()
+    new_away_attack = 0.8*new_data.groupby('AwayTeam')['xGA'].mean() + 0.2*new_data.groupby('AwayTeam')['FTAG'].mean()
+    new_away_attack_count = new_data.groupby('AwayTeam')['xGA'].count()
+    new_away_defense = 0.8*new_data.groupby('AwayTeam')['xGH'].mean() + 0.2*new_data.groupby('AwayTeam')['FTHG'].mean()
+    new_away_defense_count = new_data.groupby('AwayTeam')['xGH'].count()
+    del(new_data)
+
+    new_data = pd.DataFrame({'HomeAttack': new_home_attack, 'HomeAttackCount': new_home_attack_count,
+                             'HomeDefense': new_home_defense, 'HomeDefenseCount': new_home_defense_count,
+                             'AwayAttack': new_away_attack, 'AwayAttackCount': new_away_attack_count,
+                             'AwayDefense': new_away_defense, 'AwayDefenseCount': new_away_defense_count})
+
+    new_data.replace(np.NaN, 0.0, inplace=True)
+
+    # REGRESSION TO TURN THESE INTO PARAMETERS
+    new_data = xG_to_teamratings(new_data)
+
+    exp_factor = 0.08
+
+    for col in new_data:
+        if 'Count' in col:
+            pass
+        else:
+            new_data[col] = new_data[col] * (1 - np.exp(-exp_factor*new_data[col + 'Count']))
+
+    for index, row in new_data.iterrows():
+        team_ratings.set_value(index, 'HomeAttack',
+                               team_ratings.ix[index, 'HomeAttack'] * np.exp(-exp_factor * row['HomeAttackCount']))
+        team_ratings.set_value(index, 'AwayAttack',
+                               team_ratings.ix[index, 'AwayAttack'] * np.exp(-exp_factor * row['AwayAttackCount']))
+        team_ratings.set_value(index, 'HomeDefense',
+                               team_ratings.ix[index, 'HomeDefense'] * np.exp(-exp_factor * row['HomeDefenseCount']))
+        team_ratings.set_value(index, 'AwayDefense',
+                               team_ratings.ix[index, 'AwayDefense'] * np.exp(-exp_factor * row['AwayDefenseCount']))
+
+    for index, row in new_data.iterrows():
+        new_data.set_value(index, 'HomeAttack', team_ratings.ix[index, 'HomeAttack'] + row['HomeAttack'])
+        new_data.set_value(index, 'AwayAttack', team_ratings.ix[index, 'AwayAttack'] + row['AwayAttack'])
+        new_data.set_value(index, 'HomeDefense', team_ratings.ix[index, 'HomeDefense'] + row['HomeDefense'])
+        new_data.set_value(index, 'AwayDefense', team_ratings.ix[index, 'AwayDefense'] + row['AwayDefense'])
+
+    new_data.drop(['HomeAttackCount',
+                   'AwayAttackCount',
+                   'HomeDefenseCount',
+                   'AwayDefenseCount'
+                   ], axis=1 ,inplace=True)
+    for index, row in team_ratings.iterrows():
+        if index not in new_data.index.values:
+            new_data.loc[index] = row
+
+    new_data.to_csv('./Team ratings/E0/teamratings_17-18.csv')
+    return new_data
+
+def xG_to_teamratings(data):
+    '''
+    basically just a function to use regression to convert xG numbers to team ratings
+    :param data:
+    :return:
+    '''
+    regressions = pd.read_csv('./Team ratings/E0/ratings_mappings.csv', index_col=0)
+    for index, row in regressions.iterrows():
+        data[index] = data[index] * row['Gradient'] + row['Intercept']
+    return data
 
 def read_in_fixtures(todays_schedule):
     if todays_schedule is not None:
@@ -346,18 +417,18 @@ def send_all():
     server.quit()
 
 def main():
-    todays_schedule = get_flashscores_schedule()
+    todays_schedule = None #get_flashscores_schedule()
     next7days_schedule = read_in_fixtures(todays_schedule)
     team_ratings = read_in_team_ratings()
-    next7days_schedule = get_corresponding_odds(next7days_schedule, team_ratings)
-    get_tips(next7days_schedule, '7days')
-    send_all()
-    if todays_schedule is not None:
-        todays_schedule = get_corresponding_odds(todays_schedule, team_ratings)
-        get_tips(todays_schedule, 'Today')
-        send_tips()
-    else:
-        pass
+    # next7days_schedule = get_corresponding_odds(next7days_schedule, team_ratings)
+    # get_tips(next7days_schedule, '7days')
+    # send_all()
+    # if todays_schedule is not None:
+    #     todays_schedule = get_corresponding_odds(todays_schedule, team_ratings)
+    #     get_tips(todays_schedule, 'Today')
+    #     send_tips()
+    # else:
+    #     pass
 
 
 

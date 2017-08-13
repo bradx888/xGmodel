@@ -108,7 +108,7 @@ def read_in_team_ratings():
     # REGRESSION TO TURN THESE INTO PARAMETERS
     new_data = xG_to_teamratings(new_data)
 
-    exp_factor = 0.05
+    exp_factor = 0.08
 
     for col in new_data:
         if 'Count' in col:
@@ -137,6 +137,9 @@ def read_in_team_ratings():
                    'HomeDefenseCount',
                    'AwayDefenseCount'
                    ], axis=1 ,inplace=True)
+    for index, row in team_ratings.iterrows():
+        if index not in new_data.index.values:
+            new_data.loc[index] = row
 
     new_data.to_csv('./Team ratings/E0/teamratings_17-18.csv')
     return new_data
@@ -270,7 +273,7 @@ team_ratings = read_in_team_ratings()
 
 current_table = calculate_current_table(remaining_fixtures)
 
-results = iterator(remaining_fixtures, team_ratings, current_table, 10000)
+results = iterator(remaining_fixtures, team_ratings, current_table, 100)
 
 results.to_csv('./Table Predictions/E0/' + datetime.datetime.today().strftime("%Y-%m-%d") + '.csv')
 
