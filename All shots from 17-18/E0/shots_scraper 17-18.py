@@ -2,13 +2,8 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 import csv
 import pandas as pd
+import numpy as np
 import time
-
-# missed_data = pd.read_csv('missed_matches.csv')
-#
-# # missed_data = [200, 217, 359]
-#
-# missed_data = list(missed_data["MatchNo"])
 
 matches =[]
 
@@ -23,10 +18,14 @@ for index, row in data.iterrows():
 chromedriver = "/Users/BradleyGrantham/Documents/Chromedriver/chromedriver"
 driver = webdriver.Chrome(chromedriver)
 
-with open('shots.csv', 'w') as csvfile:
-    writer = csv.writer(csvfile)
-    writer.writerow(['x', 'y', 'Team', 'Against', 'Scored', 'Match No', 'Date'])
-    for i in range(0, len(matches)):
+shots_data = []
+list_of_matchnos = [i for i in range(0, len(matches))]
+missed_matches = []
+
+while len(list_of_matchnos) != 0:
+    list_of_matchnos = [x for x in list_of_matchnos if x not in missed_matches]
+    # list_of_matchnos = new
+    for i in list_of_matchnos:
         driver.get(
             'http://epl.squawka.com/english-premier-league/' + matches[i][2] + '/' + matches[i][0] + '-vs-' +
             matches[i][1] + '/matches')
@@ -45,9 +44,29 @@ with open('shots.csv', 'w') as csvfile:
                     else:
                         scored = 'Missed'
                     if float(shot.circle['cx']) > 240:
-                        writer.writerow([480 - float(shot.circle['cx']), shot.circle['cy'], matches[i][0], matches[i][1], scored, str(i), matches[i][2]])
+                        shots_data.append({'x': 480 - float(shot.circle['cx']),
+                                   'y': shot.circle['cy'],
+                                   'Team': matches[i][0],
+                                   'Against': matches[i][1],
+                                   'Scored': scored,
+                                   'Match No': str(i),
+                                   'Date': matches[i][2]})
                     else:
-                        writer.writerow([shot.circle['cx'], shot.circle['cy'], matches[i][1], matches[i][0], scored, str(i), matches[i][2]])
+                        shots_data.append({'x': shot.circle['cx'],
+                                      'y': shot.circle['cy'],
+                                      'Team': matches[i][1],
+                                      'Against': matches[i][0],
+                                      'Scored': scored,
+                                      'Match No': str(i),
+                                      'Date': matches[i][2]})
         except Exception:
             pass
+
+
+    shots_data_df = pd.DataFrame(shots_data)
+    missed_matches = list(set(shots_data_df['Match No']))
+    missed_matches = [int(x) for x in missed_matches]
+
 driver.quit()
+
+shots_data_df.to_csv('shots.csv')

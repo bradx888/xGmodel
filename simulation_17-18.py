@@ -1,3 +1,7 @@
+'''
+this works from the start of the season when ratings have been calculated for the previous season
+'''
+
 import pandas as pd
 import numpy as np
 import math

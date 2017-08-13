@@ -9,7 +9,12 @@ def myprob(distance, angle):
     result = 1.0646383882981121*np.exp(-0.0247111*x)
     return result
 
-def tidy_data(shot_data):
+def tidy_and_format_data(shot_data):
+    '''
+    takes shot data, adds distance, angle, colour and a probability
+    :param shot_data:
+    :return:
+    '''
     for index, row in shot_data.iterrows():
         if row['x'] > 240:
             shot_data.set_value(index, 'x', 480 - row['x'])
@@ -43,7 +48,7 @@ img = imread('./xG Plots/background.jpg')
 home_team = input('Input home team: ')
 away_team = input('Input away team: ')
 
-data = tidy_data(data)
+data = tidy_and_format_data(data) # add xG values to each shot and a colour etc
 
 football_data['Date'] = pd.to_datetime(football_data['Date'], format='%d/%m/%Y')
 

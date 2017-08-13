@@ -1,3 +1,9 @@
+'''
+This script will only work if all teams have played at least one match in the current season
+The remaining fixtures file must be correct for this to work!
+As well as the current seasons football data file being up to data incl. the xG numbers
+'''
+
 import pandas as pd
 import numpy as np
 import math
@@ -55,28 +61,6 @@ def predictor2(population, weights):
     new = random.choices(population, weights)
     return new
 
-def predictor(probability_matrix):
-    x = random.random()
-    running_total = 0
-    home_goals = 10
-    away_goals = 10
-    score = []
-    for i in range(0, 5):
-        for j in range(0, 5):
-            # print(str(probability_matrix[i][j]) + ', ', end =" ")
-            running_total += probability_matrix[i][j]
-            if running_total > x:
-                home_goals = i
-                away_goals = j
-                break
-        if home_goals != 10 and away_goals != 10:
-            break
-    if home_goals == 10 and away_goals == 10:
-        home_goals = 0
-        away_goals = 0
-    score = [home_goals, away_goals]
-    return score
-
 def read_in_fixtures():
      fixtures = pd.read_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Fixtures/E0/Remaining 17-18 Fixtures.csv',
                            index_col=0)
@@ -84,10 +68,10 @@ def read_in_fixtures():
      return fixtures
 
 def read_in_team_ratings():
-    team_ratings = pd.read_csv('./Team ratings/E0/teamratings_16-17_dixoncoles-moretol.csv',
+    team_ratings = pd.read_csv('./Team ratings/E0/teamratings_16-17.csv',
                            index_col=0)
 
-    championship_team_ratings = pd.read_csv('./Team ratings/E1/championship_teamratings_16-17.csv',
+    championship_team_ratings = pd.read_csv('./Team ratings/E1/teamratings_16-17.csv',
                                         index_col=0)
 
     for column in championship_team_ratings:
@@ -104,13 +88,13 @@ def read_in_team_ratings():
         './Football-data.co.uk/E0/17-18.csv'
     )
 
-    new_home_attack = new_data.groupby('HomeTeam')['xGH'].mean()
+    new_home_attack = 0.8*new_data.groupby('HomeTeam')['xGH'].mean() + 0.2*new_data.groupby('HomeTeam')['FTHG'].mean()
     new_home_attack_count = new_data.groupby('HomeTeam')['xGH'].count()
-    new_home_defense = new_data.groupby('HomeTeam')['xGA'].mean()
+    new_home_defense = 0.8*new_data.groupby('HomeTeam')['xGA'].mean() + 0.2*new_data.groupby('HomeTeam')['FTAG'].mean()
     new_home_defense_count = new_data.groupby('HomeTeam')['xGA'].count()
-    new_away_attack = new_data.groupby('AwayTeam')['xGA'].mean()
+    new_away_attack = 0.8*new_data.groupby('AwayTeam')['xGA'].mean() + 0.2*new_data.groupby('AwayTeam')['FTAG'].mean()
     new_away_attack_count = new_data.groupby('AwayTeam')['xGA'].count()
-    new_away_defense = new_data.groupby('AwayTeam')['xGH'].mean()
+    new_away_defense = 0.8*new_data.groupby('AwayTeam')['xGH'].mean() + 0.2*new_data.groupby('AwayTeam')['FTHG'].mean()
     new_away_defense_count = new_data.groupby('AwayTeam')['xGH'].count()
     del(new_data)
 
@@ -124,7 +108,7 @@ def read_in_team_ratings():
     # REGRESSION TO TURN THESE INTO PARAMETERS
     new_data = xG_to_teamratings(new_data)
 
-    exp_factor = 0.08
+    exp_factor = 0.05
 
     for col in new_data:
         if 'Count' in col:
@@ -158,6 +142,11 @@ def read_in_team_ratings():
     return new_data
 
 def xG_to_teamratings(data):
+    '''
+    basically just a function to use regression to convert xG numbers to team ratings
+    :param data:
+    :return:
+    '''
     regressions = pd.read_csv('./Team ratings/E0/ratings_mappings.csv', index_col=0)
     for index, row in regressions.iterrows():
         data[index] = data[index] * row['Gradient'] + row['Intercept']
@@ -281,7 +270,7 @@ team_ratings = read_in_team_ratings()
 
 current_table = calculate_current_table(remaining_fixtures)
 
-results = iterator(remaining_fixtures, team_ratings, current_table, 100)
+results = iterator(remaining_fixtures, team_ratings, current_table, 10000)
 
 results.to_csv('./Table Predictions/E0/' + datetime.datetime.today().strftime("%Y-%m-%d") + '.csv')
 

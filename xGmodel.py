@@ -1,3 +1,8 @@
+'''
+this script is what is used to actually 'make' an xG model
+the myprob function is the current formula used to assign a probability to each shot
+'''
+
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LogisticRegression, LinearRegression

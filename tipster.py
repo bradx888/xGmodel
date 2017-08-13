@@ -1,3 +1,8 @@
+'''
+as long as the files that this script is dependant on are up to date
+this should run automatically on a raspberry pi and email me tips every morning
+'''
+
 import numpy as np
 import pandas as pd
 from selenium import webdriver

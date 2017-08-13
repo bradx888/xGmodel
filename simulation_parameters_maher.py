@@ -1,3 +1,8 @@
+'''
+this is quicker than the dixon coles method but not as efficient
+because the simulation uses a bivariate poisson distribution
+'''
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt

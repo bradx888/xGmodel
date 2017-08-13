@@ -1,3 +1,9 @@
+'''
+This is slightly different from the 17-18 version of the script purely because
+the shot files for previous seasons were all formatted before writing the script.
+The new script works from raw shot data scraped from squawka
+'''
+
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt

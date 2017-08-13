@@ -1,3 +1,8 @@
+'''
+this script sums the xG for each team in a match and then assigns it to
+the corresponding match in the football-data.co.uk file
+'''
+
 import numpy as np
 import pandas as pd
 
@@ -8,7 +13,12 @@ def myprob(distance, angle):
     return result
 
 
-def tidy_data(shot_data):
+def tidy_and_format_data(shot_data):
+    '''
+    takes shot data, adds distance, angle, colour and a probability
+    :param shot_data:
+    :return:
+    '''
     for index, row in shot_data.iterrows():
         if row['x'] > 240:
             shot_data.set_value(index, 'x', 480 - row['x'])
@@ -32,21 +42,30 @@ def tidy_data(shot_data):
 
     return shot_data
 
+def add_xG_to_fd(raw_shots, football_data):
+    '''
+    add xG values to the football data file so that it can be used for team ratings etc
+    :param raw_shots: shot data exactly how it is scraped from squawka
+    :param football_data: football-data file from football-data.co.uk
+    :return: saves the new file in the respective folder
+    '''
+    raw_shots = raw_shots.groupby(by=['Team', 'Match No'], as_index=False)['Proba_exp'].sum()
+    raw_shots.sort_values(by='Match No', axis=0, inplace=True)
+    for index, row in football_data.iterrows():
+        for index1, row1 in raw_shots.iterrows():
+            if index == row1['Match No'] and row1['Team'] == row['AwayTeam']:
+                football_data.set_value(index, 'xGA', row1['Proba_exp'])
+            if index == row1['Match No'] and row1['Team'] == row['HomeTeam']:
+                football_data.set_value(index, 'xGH', row1['Proba_exp'])
+
+    football_data.to_csv('./Football-data.co.uk/E0/17-18.csv')
 
 raw_shots = pd.read_csv('./All shots from 17-18/E0/shots.csv', index_col=0)
 football_data = pd.read_csv('./Football-data.co.uk/E0/17-18.csv')
 mappings = pd.read_csv('./All shots from 17-18/E0/mappings.csv', index_col=1, header=None)
 raw_shots.replace(mappings[0], inplace=True)
 
-raw_shots = tidy_data(raw_shots)
+raw_shots = tidy_and_format_data(raw_shots)
 
-raw_shots = raw_shots.groupby(by = ['Team', 'Match No'], as_index=False)['Proba_exp'].sum()
-raw_shots.sort_values(by='Match No',axis=0, inplace=True)
-for index, row in football_data.iterrows():
-    for index1, row1 in raw_shots.iterrows():
-        if index == row1['Match No'] and row1['Team'] == row['AwayTeam']:
-            football_data.set_value(index, 'xGA', row1['Proba_exp'])
-        if index == row1['Match No'] and row1['Team'] == row['HomeTeam']:
-            football_data.set_value(index, 'xGH', row1['Proba_exp'])
+add_xG_to_fd(raw_shots, football_data)
 
-football_data.to_csv('./Football-data.co.uk/E0/17-18.csv')

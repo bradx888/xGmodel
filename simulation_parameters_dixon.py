@@ -1,3 +1,8 @@
+'''
+this is the script that should be used to generate team ratings for an entire season
+doesnt work during the season as not every team has played each other
+'''
+
 import numpy as np
 import pandas as pd
 from math import factorial as fact
