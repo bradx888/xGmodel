@@ -2,6 +2,8 @@
 This script will only work if all teams have played at least one match in the current season
 The remaining fixtures file must be correct for this to work!
 As well as the current seasons football data file being up to data incl. the xG numbers
+
+THINK THIS SHOULD NOW WORK AT THE START OF THE SEASON ALSO
 '''
 
 import pandas as pd
