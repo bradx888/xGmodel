@@ -4,6 +4,8 @@ The remaining fixtures file must be correct for this to work!
 As well as the current seasons football data file being up to data incl. the xG numbers
 
 THINK THIS SHOULD NOW WORK AT THE START OF THE SEASON ALSO
+
+Need to ensure remaining fixtures file is correct!!!
 '''
 
 import pandas as pd
@@ -275,7 +277,9 @@ team_ratings = read_in_team_ratings()
 
 current_table = calculate_current_table(remaining_fixtures)
 
-results = iterator(remaining_fixtures, team_ratings, current_table, 100)
+# 10,000 iterations is the norm. takes ~ 15 mins
+
+results = iterator(remaining_fixtures, team_ratings, current_table, 10000)
 
 results.to_csv('./Table Predictions/E0/' + datetime.datetime.today().strftime("%Y-%m-%d") + '.csv')
 

@@ -5,12 +5,13 @@ import pandas as pd
 import numpy as np
 import time
 import datetime
+import os
 
 def remove_numbers(text):
     return ''.join([x for x in text if not x.isdigit()])
 
 
-def get_player_ids(page_source, current_player_ids):
+def get_player_ids(page_source):
     soup = BeautifulSoup(page_source, 'lxml')
     team_lineups = soup.find_all('ul', {'class': 'team-lineup'})
     player_ids = []
@@ -18,47 +19,72 @@ def get_player_ids(page_source, current_player_ids):
     for team_lineup in team_lineups:
         players = team_lineup.find_all('li', {'class': 'mc-option'})
         for player in players:
-            if player['data-pid'] not in current_player_ids:
-                player_ids.append(player['data-pid'])
-                player_names.append(remove_numbers(player.text))
+            player_ids.append(player['data-pid'])
+            player_names.append(remove_numbers(player.text))
 
     return player_ids, player_names
 
+def get_new_match_nos():
+    start_match_no = pd.read_csv(
+        '/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/All shots from 17-18/E0/shots.csv',
+    usecols=['Match No'])
+    start_match_no = list(set(start_match_no['Match No']))
+    start_match_no = max(start_match_no) + 1
+
+    end_match_no = pd.read_csv(
+        '/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Football-data.co.uk/E0/17-18.csv')
+    end_match_no = len(end_match_no['HomeTeam'])
+    return list(range(start_match_no, end_match_no))
+
+def combine_all():
+    direc = '/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/All shots from 17-18/E0/Raw/'
+    files = os.listdir(direc)
+
+    for i in range(0, len(files)):
+        if i == 0:
+            data = pd.read_csv(direc + files[i], index_col=0)
+        else:
+            new_data = pd.read_csv(direc + files[i], index_col=0)
+            data = pd.concat([data, new_data], ignore_index=True)
+
+    data.to_csv(
+        '/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/All shots from 17-18/E0/shots.csv'
+    )
 
 matches =[]
 
-data = pd.read_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Football-data.co.uk/E0/15-16.csv')
-data['Date'] = pd.to_datetime(data['Date'], format='%d/%m/%y')
+data = pd.read_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Football-data.co.uk/E0/17-18.csv')
+data['Date'] = pd.to_datetime(data['Date'], format='%d/%m/%Y')
 
-mappings = pd.read_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/All shots from 15-16/E0/mappings.csv', index_col=0, header=None)
+mappings = pd.read_csv('mappings.csv', index_col=0, header=None)
 data.replace(mappings[1], inplace=True)
 for index, row in data.iterrows():
     date = datetime
     matches.append([row['HomeTeam'], row['AwayTeam'], row['Date'].strftime('%d-%m-%Y')])
 
-shots_data = []
-list_of_matchnos = [i for i in range(0, len(matches))]
-missed_matches = []
-
 chromedriver = "/Users/BradleyGrantham/Documents/Chromedriver/chromedriver"
+driver = webdriver.Chrome(chromedriver)
 
+shots_data = []
+list_of_matchnos = get_new_match_nos()
+missed_matches = []
 player_ids = []
 player_names = []
 
+
 while len(list_of_matchnos) != 0:
-    driver = webdriver.Chrome(chromedriver)
     list_of_matchnos = [x for x in list_of_matchnos if x not in missed_matches]
     # list_of_matchnos = new
     for i in list_of_matchnos:
         driver.get(
-            'http://epl.squawka.com/english-barclays-premier-league/' + matches[i][2] + '/' + matches[i][0] + '-vs-' +
+            'http://epl.squawka.com/english-premier-league/' + matches[i][2] + '/' + matches[i][0] + '-vs-' +
             matches[i][1] + '/matches')
         try:
 
             driver.find_element_by_xpath('//*[(@id = "mc-stat-shot")]').click()
             driver.find_element_by_xpath('//*[(@id = "team2-select")]').click()
 
-            new_player_ids, new_player_names = get_player_ids(driver.page_source, player_ids)
+            new_player_ids, new_player_names = get_player_ids(driver.page_source)
             player_ids = player_ids + new_player_ids
             player_names = player_names + new_player_names
 
@@ -95,12 +121,16 @@ while len(list_of_matchnos) != 0:
         except Exception:
             pass
 
-    driver.quit()
+
     shots_data_df = pd.DataFrame(shots_data)
     missed_matches = list(set(shots_data_df['Match No']))
     missed_matches = [int(x) for x in missed_matches]
-    print(len(missed_matches))
-    player_ids = pd.Series(data=player_names, index=player_ids)
-    shots_data_df['PlayerName'].replace(player_ids, inplace=True)
 
-    shots_data_df.to_csv('shots_with_players.csv')
+driver.quit()
+
+player_ids = pd.Series(data=player_names, index=player_ids)
+shots_data_df['PlayerName'].replace(player_ids, inplace=True)
+
+shots_data_df.to_csv('./Raw/shots_' + datetime.datetime.today().strftime('%d-%m-%Y') + '.csv')
+
+combine_all()

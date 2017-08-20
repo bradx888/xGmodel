@@ -1,0 +1,9 @@
+Ideally should only be run once the new football-data file has been released
+
+first run the shots_scraper 17-18_gameweek.py file
+
+update the remaining fixtures file
+
+run assign_xG_to_football_data.py
+
+then you can run simulation_17-18_midseason.py
