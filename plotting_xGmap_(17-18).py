@@ -84,7 +84,9 @@ text = plt.text(240, 120, home_team + ' vs. ' + away_team + '\n'
 text.set_path_effects([path_effects.Stroke(linewidth=1, foreground='black'),
                        path_effects.Normal()])
 
+plt.subplots_adjust(left=0.01, bottom=0.01, right=0.99, top=0.99,
+                wspace=None, hspace=None)
 plt.axis('off')
 plt.savefig('./xG Plots/17-18/' + home_team + '-' + away_team + ' ' + date.strftime("%Y-%m-%d") + '.png',
-            bbox_inches='tight')
+            bbox_inches=0, pad_inches=0)
 
