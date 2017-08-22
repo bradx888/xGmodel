@@ -6,6 +6,21 @@ import numpy as np
 import time
 import datetime
 import os
+import glob
+
+
+def download_and_update_football_data():
+    chromedriver = "/Users/BradleyGrantham/Documents/Chromedriver/chromedriver"
+    driver = webdriver.Chrome(chromedriver)
+    driver.get("http://www.football-data.co.uk/mmz4281/1718/E0.csv")
+    time.sleep(6)
+    driver.quit()
+    most_recent_download = max(glob.iglob('/Users/BradleyGrantham/Downloads/*.csv'), key=os.path.getctime)
+    data = pd.read_csv(most_recent_download)
+    data.to_csv(
+        '/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Football-data.co.uk/E0/17-18.csv'
+    )
+
 
 def remove_numbers(text):
     return ''.join([x for x in text if not x.isdigit()])
@@ -51,10 +66,20 @@ def combine_all():
         '/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/All shots from 17-18/E0/shots.csv'
     )
 
+
+'''
+
+Start of main program is here
+
+'''
+
+download_and_update_football_data()
+
+
 matches =[]
 
 data = pd.read_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Football-data.co.uk/E0/17-18.csv')
-data['Date'] = pd.to_datetime(data['Date'], format='%d/%m/%Y')
+data['Date'] = pd.to_datetime(data['Date'], format='%d/%m/%y')
 
 mappings = pd.read_csv('mappings.csv', index_col=0, header=None)
 data.replace(mappings[1], inplace=True)
@@ -123,8 +148,11 @@ while len(list_of_matchnos) != 0:
 
 
     shots_data_df = pd.DataFrame(shots_data)
-    missed_matches = list(set(shots_data_df['Match No']))
-    missed_matches = [int(x) for x in missed_matches]
+    try:
+        missed_matches = list(set(shots_data_df['Match No']))
+        missed_matches = [int(x) for x in missed_matches]
+    except KeyError:
+        pass
 
 driver.quit()
 

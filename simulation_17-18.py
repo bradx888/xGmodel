@@ -13,6 +13,7 @@ import numpy as np
 import math
 import random
 import datetime
+from numpy import inf
 
 def promoted_teams_attack(old_param):
     parameter = 0.53683956207924333 * old_param + 0.049598077388848139
@@ -138,13 +139,18 @@ def calculate_this_seasons_ratings(exp_factor=0.08):
                                                                'FTHG', 'FTAG',
                                                                'HST', 'AST',
                                                                'HS', 'AS']].mean()
-        X = data.as_matrix(columns=['xGH', 'xGA',
-                                     'FTHG', 'FTAG',
-                                     'HST', 'AST',
-                                     'HS', 'AS'])
-        theta = np.load('./Simulation Regression/theta_' + rating + '.npy')
+        temp_data['HSToverHS'] = temp_data['HST'] / temp_data['HS']
+        temp_data['ASToverAS'] = temp_data['AST'] / temp_data['AS']
+        temp_data['xGHoverFTHG'] = temp_data['xGH'] / temp_data['FTHG']
+        temp_data['xGAoverFTAG'] = temp_data['xGA'] / temp_data['FTAG']
+        X = temp_data.as_matrix(columns=np.load('./Simulation Regression/colnames_'+rating+'_new.npy')[1:])
+        X[X == -inf] = 0.0
+        X[X == inf] = 0.0
+        theta = np.load('./Simulation Regression/theta_' + rating + '_new.npy')
         X = np.c_[np.ones(X.shape[0]), X]
+        # print(X)
         temp_ratings = np.dot(X, theta)
+        # print(temp_ratings)
         temp_teams = temp_data.index.values
         temp_dict = dict.fromkeys(temp_teams, 0)
         for i in range(0, len(temp_teams)):
@@ -192,10 +198,10 @@ def iterator(fixtures, team_ratings, current_table, mc_iterations):
 
     for index, row in current_table.iterrows():
         initial_points[index] += row['Points']
-        goals[index] += row['GD']
-        wincount[index] += row['Wins']
-        drawcount[index] += row['Draws']
-        losscount[index] += row['Losses']
+        goals[index] += row['GD']*mc_iterations
+        wincount[index] += row['Wins']*mc_iterations
+        drawcount[index] += row['Draws']*mc_iterations
+        losscount[index] += row['Losses']*mc_iterations
 
     population = dict()
     weights = dict()

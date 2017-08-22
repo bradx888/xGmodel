@@ -50,7 +50,7 @@ away_team = input('Input away team: ')
 
 data = tidy_and_format_data(data) # add xG values to each shot and a colour etc
 
-football_data['Date'] = pd.to_datetime(football_data['Date'], format='%d/%m/%Y')
+football_data['Date'] = pd.to_datetime(football_data['Date'], format='%d/%m/%y')
 
 for index, row in football_data.iterrows():
     if row['HomeTeam'] == home_team and row['AwayTeam'] == away_team:
