@@ -1,5 +1,4 @@
 '''
-This script will only work if all teams have played at least one match in the current season
 The remaining fixtures file must be correct for this to work!
 As well as the current seasons football data file being up to data incl. the xG numbers
 
@@ -302,7 +301,7 @@ current_table = calculate_current_table(remaining_fixtures)
 
 # 10,000 iterations is the norm. takes ~ 15 mins
 
-results = iterator(remaining_fixtures, team_ratings, current_table, 10000)
+results = iterator(remaining_fixtures, team_ratings, current_table, 2000)
 
 results.to_csv('./Table Predictions/E0/' + datetime.datetime.today().strftime("%Y-%m-%d") + '.csv')
 

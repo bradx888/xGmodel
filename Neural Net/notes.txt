@@ -1,0 +1,12 @@
+Results of Neural Net
+
+Warning: Desired error not necessarily achieved due to precision loss.
+         Current function value: 0.279071
+         Iterations: 2565
+         Function evaluations: 5240
+         Gradient evaluations: 5228
+(7, 6) (7, 1)
+0.27907105343618155 10.2839717746
+[[ 1.  0.  0.  0.  0.  0.]
+ [ 1.  0.  0.  1.  0.  0.]] [[ 0.96842489  0.8777221 ]] [[ 1.]
+ [ 1.]]

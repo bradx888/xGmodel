@@ -178,7 +178,6 @@ def calculate_this_seasons_ratings(exp_factor=0.08):
 
     return new_ratings
 
-
 def read_in_fixtures(todays_schedule):
     if todays_schedule is not None:
         data = pd.read_csv(
@@ -279,7 +278,7 @@ def get_corresponding_odds(schedule, team_ratings):
         for index, row in schedule.iterrows():
             my_url = 'https://www.oddschecker.com/football/english/premier-league/' + row['HomeTeam_OddsName'] + '-v-' + row[
                 'AwayTeam_OddsName'] + '/winner'
-            print(my_url)
+            # print(my_url)
             driver.get(my_url)
             try:
                 driver.find_element_by_xpath('//*[@id="promo-modal"]/div[1]/div/span').click()

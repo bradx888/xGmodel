@@ -1,16 +1,41 @@
 '''
 this script sums the xG for each team in a match and then assigns it to
 the corresponding match in the football-data.co.uk file
+
+THIS ALSO NOW USES THE NEURAL NETWORK
 '''
 
 import numpy as np
 import pandas as pd
 
+np.seterr(over='ignore', under='ignore')
 
 def myprob(distance, angle):
     x = distance*np.power((angle+1), 0.5)
     result = 1.0646383882981121*np.exp(-0.0247111*x)
     return result
+
+def sigmoid(x):
+    return 1/(1+np.exp(-x))
+
+def nn_prob(shot_data):
+    theta1 = np.load('./Neural Net/xG_theta1.npy')
+    theta2 = np.load('./Neural Net/xG_theta2.npy')
+    X_cv = shot_data.as_matrix(columns=['x', 'y', 'Header',
+                                        'Distance', 'Angle'])
+
+    X_cv = np.c_[np.ones(X_cv.shape[0]), X_cv]
+
+    m = X_cv.shape[0]
+
+    a_1 = X_cv.T
+    z_2 = np.dot(theta1, a_1)
+    a_2 = sigmoid(z_2)
+    # WILL ADD A BIAS UNIT SOON
+    z_3 = np.dot(theta2, a_2)
+    a_3 = sigmoid(z_3)
+    h_theta = a_3
+    return h_theta.T
 
 
 def tidy_and_format_data(shot_data):
@@ -38,7 +63,7 @@ def tidy_and_format_data(shot_data):
             shot_data.set_value(index, 'Colour', 'r')
             shot_data.set_value(index, 'ScoredBinary', 0)
 
-    shot_data['Proba_exp'] = myprob(shot_data['Distance'], shot_data['Angle'])
+    shot_data['Proba_exp'] = nn_prob(shot_data)
 
     return shot_data
 
