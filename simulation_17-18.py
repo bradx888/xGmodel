@@ -301,7 +301,7 @@ current_table = calculate_current_table(remaining_fixtures)
 
 # 10,000 iterations is the norm. takes ~ 15 mins
 
-results = iterator(remaining_fixtures, team_ratings, current_table, 2000)
+results = iterator(remaining_fixtures, team_ratings, current_table, 10000)
 
 results.to_csv('./Table Predictions/E0/' + datetime.datetime.today().strftime("%Y-%m-%d") + '.csv')
 
