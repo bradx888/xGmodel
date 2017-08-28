@@ -96,6 +96,8 @@ for index, row in data.iterrows():
     if row['Team'] == away_team:
         data.set_value(index, 'x', 480 -row['x'])
 
+data.sort_values(by=['Scored'], ascending=True, inplace=True)
+
 plt.scatter(data['x'], data['y'], s=data['Proba_exp']*400, facecolors=data['Colour'],
             edgecolors='black', linewidth=0.4)
 plt.ylim(-366/2, 366/2)
