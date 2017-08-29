@@ -40,9 +40,11 @@ def tidy_and_format_data(shot_data):
     :param shot_data:
     :return:
     '''
+    shot_data['Over240'] = 1
     for index, row in shot_data.iterrows():
         if row['x'] > 240:
             shot_data.set_value(index, 'x', 480 - row['x'])
+            shot_data.set_value(index, 'Over240', 0)
 
     shot_data['y'] = shot_data['y'] - 366/2
     shot_data['y'] = shot_data['y'] * -1
@@ -63,9 +65,27 @@ def tidy_and_format_data(shot_data):
 
     return shot_data
 
+def flip_y_values_if_away_team(football_data, shot_data):
+    '''
+    IF the shot was taken when the player was playing for the away side then
+    the y value needs to be flipped now that all shots are being plotted on one side of the pitch
+    :param football_data:
+    :param shot_data:
+    :return:
+    '''
+
+    for index_sd, row_sd in shot_data.iterrows():
+        for index_fd, row_fd in football_data.iterrows():
+            if row_sd['Date'] == row_fd['Date'] and row_sd['Team'] == row_fd['AwayTeam']:
+                shot_data.set_value(index_sd, 'y', row_sd['y']*-1)
+
+    return shot_data
+
 
 data = pd.read_csv('./All shots from 17-18/E0/shots.csv', index_col=0)
 football_data = pd.read_csv('./Football-data.co.uk/E0/17-18.csv')
+football_data['Date'] = pd.to_datetime(football_data['Date'], format='%d/%m/%y')
+data['Date'] = pd.to_datetime(data['Date'], format='%d-%m-%Y')
 mappings = pd.read_csv('./All shots from 17-18/E0/mappings.csv', index_col=1, header=None)
 data.replace(mappings[0], inplace=True)
 img = imread('./xG Plots/background.jpg')
@@ -96,7 +116,7 @@ xG = np.round(sum(data['Proba_exp']), 2)
 
 data['Colour'] = data['Colour'].replace({'r': 'lightcoral', 'b':'royalblue'})
 
-data['y'] = -1 * data['y']
+data = flip_y_values_if_away_team(football_data, data)
 
 data.sort_values(by=['Scored'], ascending=True, inplace=True)
 
@@ -111,11 +131,12 @@ ax.scatter(data[data.Header == 1]['y'], data[data.Header == 1]['x'], marker="^",
 plt.xlim(-366/2, 366/2)
 plt.ylim(-10, 250)
 plt.imshow(img, zorder=0, extent=[-366/2, 366/2, -10, 490])
-text = plt.text(160, 180, player_name + '\n' + team + '\n' + 'Goals: ' + str(goals) + '\n' + 'xG: ' + str(xG),
-                horizontalalignment='right',
-         color='gold', fontsize=14, fontweight='bold')
+text = plt.text(0, 188, player_name + '\n' + team + '\n' + 'Goals: ' + str(goals) + '\n' + 'xG: ' + str(xG),
+                horizontalalignment='center',
+         color='gold', fontsize=10, fontweight='bold')
 text.set_path_effects([path_effects.Stroke(linewidth=1, foreground='black'),
                        path_effects.Normal()])
+text.set_bbox(dict(facecolor='white', alpha=0.5))
 
 plt.subplots_adjust(left=0.01, bottom=0.01, right=0.99, top=0.99,
                 wspace=None, hspace=None)
