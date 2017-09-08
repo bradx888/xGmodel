@@ -87,7 +87,7 @@ def plot_data(shot_data, home_team, away_team, match_date):
                 alpha=1.0, edgecolors='black', linewidth=0.4)
     plt.ylim(-366 / 2, 366 / 2)
     plt.xlim(-10, 490)
-    plt.imshow(img, zorder=0, extent=[-10, 490, -366 / 2, 366 / 2])
+    plt.imshow(img, zorder=0, extent=[0, 480, -366 / 2, 366 / 2])
     text = plt.text(240, 120, home_team + ' vs. ' + away_team + '\n'
                     + 'Score: ' + str(home_goals) + '  -  ' + str(away_goals) + '\n'
                     + 'xG: ' + str(np.round(xG_home, 2)) + '  -  ' + str(np.round(xG_away, 2)),

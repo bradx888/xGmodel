@@ -230,7 +230,7 @@ def plot_data(shot_data, home_team, away_team, match_date):
                 alpha=1.0, edgecolors='black', linewidth=0.4)
     plt.ylim(-366 / 2, 366 / 2)
     plt.xlim(-10, 490)
-    plt.imshow(img, zorder=0, extent=[-10, 490, -366 / 2, 366 / 2])
+    plt.imshow(img, zorder=0, extent=[0, 480, -366 / 2, 366 / 2])
     text = plt.text(240, 120, home_team + ' vs. ' + away_team + '\n'
                     + 'Score: ' + str(home_goals) + '  -  ' + str(away_goals) + '\n'
                     + 'xG: ' + str(np.round(xG_home, 2)) + '  -  ' + str(np.round(xG_away, 2)),
@@ -270,14 +270,17 @@ def print_teams_associated_with_league(league):
 
 def main():
     print('Options for league...\n BPL  Champions League  La Liga  Bundesliga  Ligue 1  Championship  Serie A  Europa')
+    time.sleep(1)
     league = input('Enter league: ')
 
     print_teams_associated_with_league(league)
+    time.sleep(1)
 
     home_team = input('Enter home team: ')
     away_team = input('Enter away team: ')
 
     print('Enter the date as dd-mm-yyyy or Today if the match was today.')
+    time.sleep(1)
     match_date = input('Enter date: ')
     if match_date == 'Today':
         match_date = datetime.datetime.today().strftime('%d-%m-%Y')
