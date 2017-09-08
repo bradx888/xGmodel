@@ -7,6 +7,7 @@ from scipy.misc import imread
 import matplotlib.pyplot as plt
 import matplotlib.patheffects as path_effects
 import datetime
+import time
 
 def sigmoid(x):
     return 1/(1+np.exp(-x))
@@ -65,8 +66,6 @@ def tidy_and_format_data(shot_data):
     return shot_data
 
 def get_shots(home_team, away_team, date, league):
-    chromedriver = "/Users/BradleyGrantham/Documents/Chromedriver/chromedriver"
-    driver = webdriver.Chrome(chromedriver)
 
     mappings = pd.read_csv('./Team mappings/all_leagues.csv', index_col=0, header=None)
 
@@ -96,10 +95,13 @@ def get_shots(home_team, away_team, date, league):
         league_prefix = 'championship'
 
     temp_shots_data = []
-    driver.get(
-        'http://' + league_prefix + '.squawka.com/' + league + '/' + date + '/' + home_team + '-vs-' +
-        away_team + '/matches')
+
     while len(temp_shots_data) == 0:
+        chromedriver = "/Users/BradleyGrantham/Documents/Chromedriver/chromedriver"
+        driver = webdriver.Chrome(chromedriver)
+        driver.get(
+            'http://' + league_prefix + '.squawka.com/' + league + '/' + date + '/' + home_team + '-vs-' +
+            away_team + '/matches')
         try:
 
             driver.find_element_by_xpath('//*[(@id = "mc-stat-shot")]').click()
@@ -177,9 +179,10 @@ def get_shots(home_team, away_team, date, league):
             temp_shots_data = []
             pass
 
-    shots_data_df = pd.DataFrame(temp_shots_data)
+        driver.quit()
+        time.sleep(10)
 
-    driver.quit()
+    shots_data_df = pd.DataFrame(temp_shots_data)
 
     mappings = pd.read_csv('./Team mappings/all_leagues.csv', index_col=1, header=None)
     shots_data_df.replace(mappings[0], inplace=True)
@@ -204,8 +207,8 @@ def calc_goals_scored(shot_data, home_team, away_team):
 
 def plot_data(shot_data, home_team, away_team, match_date):
     shot_data = tidy_and_format_data(shot_data)  # add xG values to each shot and a colour etc
-    img = imread('./xG Plots/background.jpg')
-    shot_data['Colour'] = shot_data['Colour'].replace({'r': 'lightcoral', 'b': 'royalblue'})
+    img = imread('./xG Plots/background3.jpg')
+    shot_data['Colour'] = shot_data['Colour'].replace({'r': 'white', 'b': 'magenta'})
     shot_data['y'] = -1 * shot_data['y']
     xG_home = shot_data.loc[shot_data['Team'] == home_team, 'Proba_exp'].sum()
     xG_away = shot_data.loc[shot_data['Team'] == away_team, 'Proba_exp'].sum()
@@ -218,8 +221,13 @@ def plot_data(shot_data, home_team, away_team, match_date):
 
     shot_data.sort_values(by=['Scored'], ascending=True, inplace=True)
 
-    plt.scatter(shot_data['x'], shot_data['y'], s=shot_data['Proba_exp'] * 400, facecolors=shot_data['Colour'],
-                edgecolors='black', linewidth=0.4)
+    plt.scatter(shot_data[shot_data['Scored']=='Missed']['x'], shot_data[shot_data['Scored']=='Missed']['y'],
+                s=shot_data[shot_data['Scored']=='Missed']['Proba_exp'] * 400, facecolors=shot_data[shot_data['Scored']=='Missed']['Colour'],
+                alpha=0.6, edgecolors='black', linewidth=0.4)
+    plt.scatter(shot_data[shot_data['Scored'] == 'Scored']['x'], shot_data[shot_data['Scored'] == 'Scored']['y'],
+                s=shot_data[shot_data['Scored'] == 'Scored']['Proba_exp'] * 400,
+                facecolors=shot_data[shot_data['Scored'] == 'Scored']['Colour'],
+                alpha=1.0, edgecolors='black', linewidth=0.4)
     plt.ylim(-366 / 2, 366 / 2)
     plt.xlim(-10, 490)
     plt.imshow(img, zorder=0, extent=[-10, 490, -366 / 2, 366 / 2])
@@ -227,14 +235,13 @@ def plot_data(shot_data, home_team, away_team, match_date):
                     + 'Score: ' + str(home_goals) + '  -  ' + str(away_goals) + '\n'
                     + 'xG: ' + str(np.round(xG_home, 2)) + '  -  ' + str(np.round(xG_away, 2)),
                     horizontalalignment='center',
-                    color='gold', fontsize=10, fontweight='bold')
+                    color='white', alpha=0.8, fontsize=10, fontweight='bold')
     text.set_path_effects([path_effects.Stroke(linewidth=1, foreground='black'),
                            path_effects.Normal()])
 
     plt.subplots_adjust(left=0.01, bottom=0.01, right=0.99, top=0.99,
                         wspace=None, hspace=None)
     plt.axis('off')
-    plt.show()
     plt.savefig('./xG Plots/Other Plots/' + home_team + '-' + away_team + ' ' + match_date + '.png',
                 bbox_inches=0, pad_inches=0)
 
@@ -252,13 +259,13 @@ def print_teams_associated_with_league(league):
     elif league == 'Champions League':
         file_path = './Football-data.co.uk/SP1/SP1.csv'
     elif league == 'Championship':
-        file_path = './Football-data.co.uk/E1/E1.csv'
+        file_path = './Football-data.co.uk/E1/17-18.csv'
 
-    print('\n')
     data = pd.read_csv(file_path)
     teams = list(set(data.iloc[:, 2:4].values.T.ravel()))
-    for i in range(0, len(teams), 5):
-        print(teams[i], '-', teams[i+1], '-',teams[i+2], '-', teams[i+3], '-', teams[i+4])
+    teams.sort()
+    for i in range(0, len(teams)):
+        print(teams[i])
     print('\n')
 
 def main():

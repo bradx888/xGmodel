@@ -62,6 +62,61 @@ def tidy_and_format_data(shot_data):
 
     return shot_data
 
+def plot_data(shot_data, home_team, away_team, match_date):
+    shot_data = tidy_and_format_data(shot_data)  # add xG values to each shot and a colour etc
+    img = imread('./xG Plots/background3.jpg')
+    shot_data['Colour'] = shot_data['Colour'].replace({'r': 'white', 'b': 'magenta'})
+    shot_data['y'] = -1 * shot_data['y']
+    xG_home = shot_data.loc[shot_data['Team'] == home_team, 'Proba_exp'].sum()
+    xG_away = shot_data.loc[shot_data['Team'] == away_team, 'Proba_exp'].sum()
+
+    home_goals, away_goals = calc_goals_scored(shot_data, home_team, away_team)
+
+    for index, row in shot_data.iterrows():
+        if row['Team'] == away_team:
+            shot_data.set_value(index, 'x', 480 - row['x'])
+
+    shot_data.sort_values(by=['Scored'], ascending=True, inplace=True)
+
+    plt.scatter(shot_data[shot_data['Scored']=='Missed']['x'], shot_data[shot_data['Scored']=='Missed']['y'],
+                s=shot_data[shot_data['Scored']=='Missed']['Proba_exp'] * 400, facecolors=shot_data[shot_data['Scored']=='Missed']['Colour'],
+                alpha=0.6, edgecolors='black', linewidth=0.4)
+    plt.scatter(shot_data[shot_data['Scored'] == 'Scored']['x'], shot_data[shot_data['Scored'] == 'Scored']['y'],
+                s=shot_data[shot_data['Scored'] == 'Scored']['Proba_exp'] * 400,
+                facecolors=shot_data[shot_data['Scored'] == 'Scored']['Colour'],
+                alpha=1.0, edgecolors='black', linewidth=0.4)
+    plt.ylim(-366 / 2, 366 / 2)
+    plt.xlim(-10, 490)
+    plt.imshow(img, zorder=0, extent=[-10, 490, -366 / 2, 366 / 2])
+    text = plt.text(240, 120, home_team + ' vs. ' + away_team + '\n'
+                    + 'Score: ' + str(home_goals) + '  -  ' + str(away_goals) + '\n'
+                    + 'xG: ' + str(np.round(xG_home, 2)) + '  -  ' + str(np.round(xG_away, 2)),
+                    horizontalalignment='center',
+                    color='white', alpha=0.8, fontsize=10, fontweight='bold')
+    text.set_path_effects([path_effects.Stroke(linewidth=1, foreground='black'),
+                           path_effects.Normal()])
+
+    plt.subplots_adjust(left=0.01, bottom=0.01, right=0.99, top=0.99,
+                        wspace=None, hspace=None)
+    plt.axis('off')
+    plt.savefig('./xG Plots/17-18/' + home_team + '-' + away_team + ' ' + match_date + '.png',
+                bbox_inches=0, pad_inches=0)
+
+def calc_goals_scored(shot_data, home_team, away_team):
+
+    shot_data_team = shot_data[shot_data['Team']==home_team]
+    try:
+        home_goals = shot_data_team['Scored'].value_counts()['Scored']
+    except KeyError:
+        home_goals = 0
+
+    shot_data_team = shot_data[shot_data['Team'] == away_team]
+    try:
+        away_goals = shot_data_team['Scored'].value_counts()['Scored']
+    except KeyError:
+        away_goals = 0
+
+    return home_goals, away_goals
 
 data = pd.read_csv('./All shots from 17-18/E0/shots.csv', index_col=0)
 football_data = pd.read_csv('./Football-data.co.uk/E0/17-18.csv')
@@ -72,9 +127,7 @@ img = imread('./xG Plots/background.jpg')
 home_team = input('Input home team: ')
 away_team = input('Input away team: ')
 
-data = tidy_and_format_data(data) # add xG values to each shot and a colour etc
-
-football_data['Date'] = pd.to_datetime(football_data['Date'], format='%d/%m/%y')
+football_data['Date'] = pd.to_datetime(football_data['Date'])
 
 for index, row in football_data.iterrows():
     if row['HomeTeam'] == home_team and row['AwayTeam'] == away_team:
@@ -83,36 +136,7 @@ for index, row in football_data.iterrows():
         date = row['Date']
         match_no = index
 
-data = data[data["Match No"] == match_no]
+data = data[data['Match No'] == match_no]
 
-data['Colour'] = data['Colour'].replace({'r': 'lightcoral', 'b':'royalblue'})
-
-data['y'] = -1 * data['y']
-
-xG_home = data.loc[data['Team'] == home_team, 'Proba_exp'].sum()
-xG_away = data.loc[data['Team'] == away_team, 'Proba_exp'].sum()
-
-for index, row in data.iterrows():
-    if row['Team'] == away_team:
-        data.set_value(index, 'x', 480 -row['x'])
-
-data.sort_values(by=['Scored'], ascending=True, inplace=True)
-
-plt.scatter(data['x'], data['y'], s=data['Proba_exp']*400, facecolors=data['Colour'],
-            edgecolors='black', linewidth=0.4)
-plt.ylim(-366/2, 366/2)
-plt.xlim(-10, 490)
-plt.imshow(img, zorder=0, extent=[-10, 490, -366/2, 366/2])
-text = plt.text(240, 120, home_team + ' vs. ' + away_team + '\n'
-         + 'Score: ' + str(home_goals) + '  -  ' + str(away_goals) + '\n'
-         + 'xG: ' + str(np.round(xG_home,2)) + '  -  ' + str(np.round(xG_away,2)), horizontalalignment='center',
-         color='gold', fontsize=10, fontweight='bold')
-text.set_path_effects([path_effects.Stroke(linewidth=1, foreground='black'),
-                       path_effects.Normal()])
-
-plt.subplots_adjust(left=0.01, bottom=0.01, right=0.99, top=0.99,
-                wspace=None, hspace=None)
-plt.axis('off')
-plt.savefig('./xG Plots/17-18/' + home_team + '-' + away_team + ' ' + date.strftime("%Y-%m-%d") + '.png',
-            bbox_inches=0, pad_inches=0)
+plot_data(data, home_team, away_team, date.strftime('%Y-%m-%d'))
 
