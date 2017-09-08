@@ -93,18 +93,15 @@ img = np.swapaxes(img, 0, 1)
 
 data = tidy_and_format_data(data) # add xG values to each shot and a colour etc
 
-print(list(data.groupby(['PlayerID'])['Proba_exp'].sum().sort_values(ascending=False).head(20).index.values))
+team = input('Input team: ')
+xG_for_or_against = input('xGFor or xGAgainst? ')
 
-player_id = input('Input player ID: ')
-player_id = int(player_id)
-
-print(data[data.PlayerID == player_id]['PlayerName'].head(1))
-
-player_name = input('Enter player name: ')
-
-data = data[data["PlayerID"] == player_id]
-
-team = data.iloc[0]['Team']
+if xG_for_or_against == 'xGFor':
+    data = data[data["Team"] == team]
+if xG_for_or_against == 'xGAgainst':
+    data = data[data["Against"] == team]
+else:
+    pass
 
 try:
     goals = data['Scored'].value_counts()['Scored']
@@ -122,27 +119,26 @@ data.sort_values(by=['Scored'], ascending=True, inplace=True)
 
 fig, ax = plt.subplots()
 
-shots = ax.scatter(data[data.Header == 0]['y'], data[data.Header == 0]['x'], marker="o", s=data[data.Header == 0]['Proba_exp']*800,
+ax.scatter(data[data.Header == 0]['y'], data[data.Header == 0]['x'], marker="o", s=data[data.Header == 0]['Proba_exp']*800,
             facecolors=data[data.Header == 0]['Colour'],
-            edgecolors='black', linewidth=0.6, label='Shots')
-headers = ax.scatter(data[data.Header == 1]['y'], data[data.Header == 1]['x'], marker="^", s=data[data.Header == 1]['Proba_exp']*800,
+            edgecolors='black', linewidth=0.4)
+ax.scatter(data[data.Header == 1]['y'], data[data.Header == 1]['x'], marker="^", s=data[data.Header == 1]['Proba_exp']*800,
             facecolors=data[data.Header == 1]['Colour'],
-            edgecolors='black', linewidth=0.6, label='Headers')
+            edgecolors='black', linewidth=0.4)
 plt.xlim(-366/2, 366/2)
 plt.ylim(-10, 250)
 plt.imshow(img, zorder=0, extent=[-366/2, 366/2, -10, 490])
-text = plt.text(-165, 200, player_name + '\n' + team + '\n' + 'Goals: ' + str(goals) + '\n' + 'xG: ' + str(xG),
-                horizontalalignment='left',
+text = plt.text(0, 188, team + '\n' + 'Goals: ' + str(goals) + '\n' + 'xG: ' + str(xG),
+                horizontalalignment='center',
          color='gold', fontsize=10, fontweight='bold')
 text.set_path_effects([path_effects.Stroke(linewidth=1, foreground='black'),
                        path_effects.Normal()])
-plt.legend(handles=[headers], loc=3)
 
 plt.subplots_adjust(left=0.01, bottom=0.01, right=0.99, top=0.99,
                 wspace=None, hspace=None)
 plt.axis('off')
 plt.show()
-fig.savefig('./xG Plots/17-18 Players/' + player_name + ' ' + datetime.today().strftime("%Y-%m-%d") + '.png',
+fig.savefig('./xG Plots/17-18 Teams/' + team + ' ' + datetime.today().strftime("%Y-%m-%d") + '.png',
             bbox_inches=0, pad_inches=0)
 
 
