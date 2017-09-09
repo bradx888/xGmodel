@@ -449,12 +449,11 @@ def main():
         pass
 
 
-
 # schedule.every().day.at("19:55").do(main)
 #
 # while True:
 #     schedule.run_pending()
 #     time.sleep(1)
 
-main()
-
+# main()
+calculate_this_seasons_ratings(exp_factor=100).to_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Team ratings/E0/teamratings_17-18other.csv')
