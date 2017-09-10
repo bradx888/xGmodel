@@ -140,11 +140,15 @@ def calculate_this_seasons_ratings(exp_factor=0.08):
                                                                'FTHG', 'FTAG',
                                                                'HST', 'AST',
                                                                'HS', 'AS']].mean()
-        X = data.as_matrix(columns=['xGH', 'xGA',
-                                     'FTHG', 'FTAG',
-                                     'HST', 'AST',
-                                     'HS', 'AS'])
-        theta = np.load('./Simulation Regression/theta_' + rating + '.npy')
+
+        temp_data['xGH FTHG'] = 0.8 * temp_data['xGH'] + 0.2 * temp_data['FTHG']
+        temp_data['xGA FTAG'] = 0.8 * temp_data['xGA'] + 0.2 * temp_data['FTAG']
+
+        X = temp_data.as_matrix(columns=['xGH FTHG',
+                                    'xGA FTAG'])
+
+
+        theta = np.load('./Ratings regression/Parameters/theta_' + rating + '.npy')
         X = np.c_[np.ones(X.shape[0]), X]
         temp_ratings = np.dot(X, theta)
         temp_teams = temp_data.index.values
@@ -452,9 +456,9 @@ def main():
 schedule.every().day.at("06:00").do(main)
 # schedule.every(15).minutes.do(main)
 
-while True:
-    schedule.run_pending()
-    time.sleep(1)
+# while True:
+#     schedule.run_pending()
+#     time.sleep(1)
 
-# main()
+main()
 

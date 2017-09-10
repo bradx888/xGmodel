@@ -66,7 +66,7 @@ def predictor2(population, weights):
     return new
 
 def read_in_fixtures():
-     fixtures = pd.read_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Fixtures/E0/Remaining 17-18 Fixtures.csv',
+     fixtures = pd.read_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Fixtures/E0/17-18 FixturesTEMP.csv',
                            index_col=0)
 
      return fixtures
@@ -138,18 +138,17 @@ def calculate_this_seasons_ratings(exp_factor=0.08):
                                                                'FTHG', 'FTAG',
                                                                'HST', 'AST',
                                                                'HS', 'AS']].mean()
-        temp_data['HSToverHS'] = temp_data['HST'] / temp_data['HS']
-        temp_data['ASToverAS'] = temp_data['AST'] / temp_data['AS']
-        temp_data['xGHoverFTHG'] = temp_data['xGH'] / temp_data['FTHG']
-        temp_data['xGAoverFTAG'] = temp_data['xGA'] / temp_data['FTAG']
-        X = temp_data.as_matrix(columns=np.load('./Simulation Regression/colnames_'+rating+'_new.npy')[1:])
-        X[X == -inf] = 0.0
-        X[X == inf] = 0.0
-        theta = np.load('./Simulation Regression/theta_' + rating + '_new.npy')
+
+        temp_data['xGH FTHG'] = 0.8 * temp_data['xGH'] + 0.2 * temp_data['FTHG']
+        temp_data['xGA FTAG'] = 0.8 * temp_data['xGA'] + 0.2 * temp_data['FTAG']
+
+        X = temp_data.as_matrix(columns=['xGH FTHG',
+                                    'xGA FTAG'])
+
+
+        theta = np.load('./Ratings regression/Parameters/theta_' + rating + '.npy')
         X = np.c_[np.ones(X.shape[0]), X]
-        # print(X)
         temp_ratings = np.dot(X, theta)
-        # print(temp_ratings)
         temp_teams = temp_data.index.values
         temp_dict = dict.fromkeys(temp_teams, 0)
         for i in range(0, len(temp_teams)):
@@ -301,7 +300,7 @@ current_table = calculate_current_table(remaining_fixtures)
 
 # 10,000 iterations is the norm. takes ~ 15 mins
 
-results = iterator(remaining_fixtures, team_ratings, current_table, 10000)
+results = iterator(remaining_fixtures, team_ratings, current_table, 1000)
 
 results.to_csv('./Table Predictions/E0/' + datetime.datetime.today().strftime("%Y-%m-%d") + '.csv')
 
