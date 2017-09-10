@@ -449,10 +449,12 @@ def main():
         pass
 
 
-# schedule.every().day.at("19:55").do(main)
-#
-# while True:
-#     schedule.run_pending()
-#     time.sleep(1)
+schedule.every().day.at("06:00").do(main)
+# schedule.every(15).minutes.do(main)
 
-main()
+while True:
+    schedule.run_pending()
+    time.sleep(1)
+
+# main()
+
