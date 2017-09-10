@@ -455,5 +455,4 @@ def main():
 #     schedule.run_pending()
 #     time.sleep(1)
 
-# main()
-calculate_this_seasons_ratings(exp_factor=100).to_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Team ratings/E0/teamratings_17-18other.csv')
+main()
