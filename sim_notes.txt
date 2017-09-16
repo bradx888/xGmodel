@@ -2,7 +2,7 @@ HAVE TO UPDATE WHEN FOOTBALL DATA FILE HAS BEEN UPDATED AND ONLY THEN. OTHERWISE
 
 Ideally should only be run once the new football-data file has been released
 
-first run the shots_scraper 17-18_gameweek.py file. This makes a new file in the Raw folder (important because it then combines everything in this raw folder). This will now also download the new football-data file.
+first run the shots_scraper_17-18_gameweek.py file. This makes a new file in the Raw folder (important because it then combines everything in this raw folder). This will now also download the new football-data file.
 
 update the remaining fixtures file - at the moment this is done manually
 

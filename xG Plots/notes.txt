@@ -1,0 +1,1 @@
+Both the neural network and the exponential functions give basically the same xG results. It was fun to make the neural network though

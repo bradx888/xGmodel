@@ -439,7 +439,7 @@ def send_all():
     server.quit()
 
 def main():
-    todays_schedule = get_flashscores_schedule()
+    todays_schedule = None #get_flashscores_schedule()
     next7days_schedule = read_in_fixtures(todays_schedule)
     team_ratings = read_in_team_ratings()
     next7days_schedule = get_corresponding_odds(next7days_schedule, team_ratings)
