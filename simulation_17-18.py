@@ -66,7 +66,7 @@ def predictor2(population, weights):
     return new
 
 def read_in_fixtures():
-     fixtures = pd.read_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Fixtures/E0/Remaining 17-18 Fixtures.csv',
+     fixtures = pd.read_csv('./Fixtures/E0/Remaining 17-18 Fixtures.csv',
                            index_col=0)
 
      return fixtures
