@@ -97,7 +97,7 @@ def get_shots(home_team, away_team, date, league):
     temp_shots_data = []
 
     while len(temp_shots_data) == 0:
-        chromedriver = "/Users/BradleyGrantham/Documents/Chromedriver/chromedriver"
+        chromedriver = "./Chromedriver/chromedriver"
         driver = webdriver.Chrome(chromedriver)
         driver.get(
             'http://' + league_prefix + '.squawka.com/' + league + '/' + date + '/' + home_team + '-vs-' +
