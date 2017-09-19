@@ -10,15 +10,15 @@ import glob
 
 
 def download_and_update_football_data():
-    chromedriver = "/Users/BradleyGrantham/Documents/Chromedriver/chromedriver"
+    chromedriver = "/Users/bgrantham/Documents/Personal/xGmodel/Chromedriver/chromedriver"
     driver = webdriver.Chrome(chromedriver)
     driver.get("http://www.football-data.co.uk/mmz4281/1718/E0.csv")
     time.sleep(6)
     driver.quit()
-    most_recent_download = max(glob.iglob('/Users/BradleyGrantham/Downloads/*.csv'), key=os.path.getctime)
+    most_recent_download = max(glob.iglob('/Users/bgrantham/Downloads/*.csv'), key=os.path.getctime)
     data = pd.read_csv(most_recent_download)
     data.to_csv(
-        '/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Football-data.co.uk/E0/17-18.csv'
+        '/Users/bgrantham/Documents/Personal/xGmodel/Football-data.co.uk/E0/17-18.csv'
     )
 
 
@@ -41,7 +41,7 @@ def get_player_ids(page_source):
 
 def get_new_match_nos():
     start_match_no = pd.read_csv(
-        '/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/All shots from 17-18/E0/shots.csv',
+        'shots.csv',
     usecols=['Match No'])
     start_match_no = list(set(start_match_no['Match No']))
     if len(start_match_no)==0:
@@ -50,12 +50,12 @@ def get_new_match_nos():
         start_match_no = max(start_match_no) + 1
 
     end_match_no = pd.read_csv(
-        '/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Football-data.co.uk/E0/17-18.csv')
+        '/Users/bgrantham/Documents/Personal/xGmodel/Football-data.co.uk/E0/17-18.csv')
     end_match_no = len(end_match_no['HomeTeam'])
     return list(range(start_match_no, end_match_no))
 
 def combine_all():
-    direc = '/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/All shots from 17-18/E0/Raw/'
+    direc = './Raw/'
     files = os.listdir(direc)
 
     for i in range(0, len(files)):
@@ -66,7 +66,7 @@ def combine_all():
             data = pd.concat([data, new_data], ignore_index=True)
 
     data.to_csv(
-        '/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/All shots from 17-18/E0/shots.csv'
+        'shots.csv'
     )
 
 
@@ -81,7 +81,7 @@ download_and_update_football_data()
 
 matches =[]
 
-data = pd.read_csv('/Users/BradleyGrantham/Documents/Python/FootballPredictions/xG model/Football-data.co.uk/E0/17-18.csv')
+data = pd.read_csv('/Users/bgrantham/Documents/Personal/xGmodel/Football-data.co.uk/E0/17-18.csv')
 data['Date'] = pd.to_datetime(data['Date'], format='%d/%m/%y')
 
 mappings = pd.read_csv('mappings.csv', index_col=0, header=None)
@@ -90,7 +90,7 @@ for index, row in data.iterrows():
     date = datetime
     matches.append([row['HomeTeam'], row['AwayTeam'], row['Date'].strftime('%d-%m-%Y')])
 
-chromedriver = "/Users/BradleyGrantham/Documents/Chromedriver/chromedriver"
+chromedriver = "./Chromedriver/chromedriver"
 driver = webdriver.Chrome(chromedriver)
 
 shots_data = []
@@ -103,7 +103,7 @@ player_names = []
 while len(list_of_matchnos) != 0:
     list_of_matchnos = [x for x in list_of_matchnos if x not in missed_matches]
     # list_of_matchnos = new
-    chromedriver = "/Users/BradleyGrantham/Documents/Chromedriver/chromedriver"
+    chromedriver = "/Users/bgrantham/Documents/Personal/xGmodel/Chromedriver/chromedriver"
     driver = webdriver.Chrome(chromedriver)
     for i in list_of_matchnos:
         temp_shots_data = []
