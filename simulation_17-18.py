@@ -211,7 +211,7 @@ def iterator(fixtures, team_ratings, current_table, mc_iterations, num_cores):
         away_defense = team_ratings.loc[row['AwayTeam']]['AwayDefense']
         population[index], weights[index] = bivpois2(home_attack * away_defense, away_attack * home_defense, 0.15)
 
-    r = Parallel(n_jobs=4, verbose=100)(delayed(future_table)(current_table=current_table, drawcount=drawcount, fixtures=fixtures, goals=goals, losscount=losscount,
+    r = Parallel(n_jobs=num_cores, verbose=100)(delayed(future_table)(current_table=current_table, drawcount=drawcount, fixtures=fixtures, goals=goals, losscount=losscount,
                                              mc_iterations=int(mc_iterations/4), population=population, relegationcount=relegationcount,
                  teams=teams, top4count=top4count, total_points=total_points, weights=weights, wincount=wincount, winnercount=winnercount)  for i in range(4))
 
