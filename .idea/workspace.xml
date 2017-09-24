@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="709076f2-c8bd-4085-aba0-0351b013d710" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Team ratings/E0/teamratings_17-18.csv" afterPath="$PROJECT_DIR$/Team ratings/E0/teamratings_17-18.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simulation_17-18.py" afterPath="$PROJECT_DIR$/simulation_17-18.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tipster.py" afterPath="$PROJECT_DIR$/tipster.py" />
-    </list>
+    <list default="true" id="709076f2-c8bd-4085-aba0-0351b013d710" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
