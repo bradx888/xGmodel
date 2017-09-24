@@ -13,6 +13,8 @@ import math
 import random
 import datetime
 from numpy import inf
+from joblib import Parallel, delayed
+import os
 
 def promoted_teams_attack(old_param):
     parameter = 0.53683956207924333 * old_param + 0.049598077388848139
@@ -180,12 +182,11 @@ def calculate_this_seasons_ratings(exp_factor=0.08):
 
     return new_ratings
 
-def iterator(fixtures, team_ratings, current_table, mc_iterations):
+def iterator(fixtures, team_ratings, current_table, mc_iterations, num_cores):
 
     teams = set(list(fixtures['HomeTeam']))
 
     total_points = dict.fromkeys(teams, 0)
-    initial_points = dict.fromkeys(teams, 0)
     goals = dict.fromkeys(teams, 0)
     winnercount = dict.fromkeys(teams, 0)
     relegationcount = dict.fromkeys(teams, 0)
@@ -195,11 +196,10 @@ def iterator(fixtures, team_ratings, current_table, mc_iterations):
     losscount = dict.fromkeys(teams, 0)
 
     for index, row in current_table.iterrows():
-        initial_points[index] += row['Points']
-        goals[index] += row['GD']*mc_iterations
-        wincount[index] += row['Wins']*mc_iterations
-        drawcount[index] += row['Draws']*mc_iterations
-        losscount[index] += row['Losses']*mc_iterations
+        goals[index] += row['GD']*int(mc_iterations/num_cores)
+        wincount[index] += row['Wins']*int(mc_iterations/num_cores)
+        drawcount[index] += row['Draws']*int(mc_iterations/num_cores)
+        losscount[index] += row['Losses']*int(mc_iterations/num_cores)
 
     population = dict()
     weights = dict()
@@ -211,7 +211,34 @@ def iterator(fixtures, team_ratings, current_table, mc_iterations):
         away_defense = team_ratings.loc[row['AwayTeam']]['AwayDefense']
         population[index], weights[index] = bivpois2(home_attack * away_defense, away_attack * home_defense, 0.15)
 
-    for mc_iteration in range(0, mc_iterations):
+    r = Parallel(n_jobs=4, verbose=100)(delayed(future_table)(current_table=current_table, drawcount=drawcount, fixtures=fixtures, goals=goals, losscount=losscount,
+                                             mc_iterations=int(mc_iterations/4), population=population, relegationcount=relegationcount,
+                 teams=teams, top4count=top4count, total_points=total_points, weights=weights, wincount=wincount, winnercount=winnercount)  for i in range(4))
+
+    for _ in r:
+        print(_)
+    result =[]
+    for i in range(8):
+        result.append({k: r[0][i].get(k, 0) + r[1][i].get(k, 0) + r[2][i].get(k, 0) + r[3][i].get(k, 0) for k in set(r[0][i])})
+    wincount, drawcount, losscount, total_points, goals, winnercount, top4count, relegationcount = result
+
+    results = pd.DataFrame(
+        {'W': wincount, 'D': drawcount, 'L': losscount, 'Pts': total_points, 'GD': goals, '%Title': winnercount, '%Top4': top4count, '%Releg': relegationcount})
+    for column in results:
+        if '%' in column:
+            results[column] = np.round((results[column] / mc_iterations) * 100, decimals=2)
+        else:
+            results[column] = np.round((results[column] / mc_iterations), decimals=2)
+
+    results.sort_values('Pts', ascending=False, inplace=True)
+    cols = ['W', 'D', 'L', 'Pts', 'GD', '%Title', '%Top4', '%Releg']
+    results = results[cols]
+    return results
+
+
+def future_table(current_table, drawcount, fixtures, goals, losscount, mc_iterations, population, relegationcount,
+                 teams, top4count, total_points, weights, wincount, winnercount):
+    for i in range(int(mc_iterations)):
         points = dict.fromkeys(teams, 0)
         for index, row in current_table.iterrows():
             points[index] += row['Points']
@@ -247,18 +274,8 @@ def iterator(fixtures, team_ratings, current_table, mc_iterations):
             top4count[points.idxmax()] += 1
             points.drop([points.idxmin(), points.idxmax()], axis=0, inplace=True)
 
-    results = pd.DataFrame(
-        {'W': wincount, 'D': drawcount, 'L': losscount, 'Pts': total_points, 'GD': goals, '%Title': winnercount, '%Top4': top4count, '%Releg': relegationcount})
-    for column in results:
-        if '%' in column:
-            results[column] = np.round((results[column] / mc_iterations) * 100, decimals=2)
-        else:
-            results[column] = np.round((results[column] / mc_iterations), decimals=2)
+    return wincount, drawcount, losscount, total_points, goals, winnercount, top4count, relegationcount
 
-    results.sort_values('Pts', ascending=False, inplace=True)
-    cols = ['W', 'D', 'L', 'Pts', 'GD', '%Title', '%Top4', '%Releg']
-    results = results[cols]
-    return results
 
 def calculate_current_table(fixtures):
     data = pd.read_csv('./Football-data.co.uk/E0/17-18.csv')
@@ -291,17 +308,21 @@ def calculate_current_table(fixtures):
     results = pd.DataFrame({'Points': points, 'Wins': wincount, 'Draws': drawcount, 'Losses': losscount, 'GD': goals})
     return results
 
-now = datetime.datetime.now() # for measuring the time taken
+if __name__ == '__main__':
 
-remaining_fixtures = read_in_fixtures()
-team_ratings = read_in_team_ratings()
+    num_cores = os.cpu_count()
 
-current_table = calculate_current_table(remaining_fixtures)
+    now = datetime.datetime.now() # for measuring the time taken
 
-# 10,000 iterations is the norm. takes ~ 15 mins
+    remaining_fixtures = read_in_fixtures()
+    team_ratings = read_in_team_ratings()
 
-results = iterator(remaining_fixtures, team_ratings, current_table, 10000)
+    current_table = calculate_current_table(remaining_fixtures)
 
-results.to_csv('./Table Predictions/E0/' + datetime.datetime.today().strftime("%Y-%m-%d") + '.csv')
+    # 10,000 iterations is the norm. takes ~ 15 mins
 
-print(datetime.datetime.now()-now) # for measuring the time taken
+    results = iterator(remaining_fixtures, team_ratings, current_table, 10000, num_cores)
+
+    results.to_csv('./Table Predictions/E0/' + datetime.datetime.today().strftime("%Y-%m-%d") + '.csv')
+
+    print(datetime.datetime.now()-now) # for measuring the time taken
