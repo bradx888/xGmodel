@@ -210,7 +210,7 @@ def get_flashscores_schedule():
     my_url = 'http://www.flashscores.co.uk/football/'
 
     # initialise chromedriver
-    chromedriver = "/Users/BradleyGrantham/Documents/Chromedriver/chromedriver"
+    chromedriver = "./Chromedriver/chromedriver"
     driver = webdriver.Chrome(chromedriver)
     # display = Display(visible=0, size=(1024,768))
     # display.start()
@@ -266,7 +266,7 @@ def get_corresponding_odds(schedule, team_ratings):
     bookie is offering the best price
     '''
     if schedule is not None:
-        chromedriver = "/Users/BradleyGrantham/Documents/Chromedriver/chromedriver"
+        chromedriver = "./Chromedriver/chromedriver"
         driver = webdriver.Chrome(chromedriver)
         # display = Display(visible=0, size=(1024,768))
         # display.start()
