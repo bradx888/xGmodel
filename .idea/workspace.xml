@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="709076f2-c8bd-4085-aba0-0351b013d710" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Performance/BettingPerformance.xlsx" afterPath="$PROJECT_DIR$/Performance/BettingPerformance.xlsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one_match_simulator.py" afterPath="$PROJECT_DIR$/one_match_simulator.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simulation_17-18.py" afterPath="$PROJECT_DIR$/simulation_17-18.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tipster.py" afterPath="$PROJECT_DIR$/tipster.py" />
@@ -17,11 +15,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="shots_scraper 17-18_gameweek.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="shots_scraper 17-18_gameweek.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/All shots from 17-18/E0/shots_scraper 17-18_gameweek.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+            <state relative-caret-position="176">
+              <caret line="51" column="26" lean-forward="false" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -43,11 +41,45 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="tipster.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tipster.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1177">
+              <caret line="98" column="59" lean-forward="false" selection-start-line="98" selection-start-column="59" selection-end-line="98" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="simulation_17-18.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/simulation_17-18.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="282">
+              <caret line="183" column="0" lean-forward="true" selection-start-line="183" selection-start-column="0" selection-end-line="183" selection-end-column="0" />
+              <folding>
+                <element signature="e#273#292#0" expanded="true" />
+                <element signature="e#466#553#0" expanded="false" />
+                <element signature="e#598#684#0" expanded="false" />
+                <element signature="e#719#827#0" expanded="false" />
+                <element signature="e#855#942#0" expanded="false" />
+                <element signature="e#981#1262#0" expanded="false" />
+                <element signature="e#1314#1628#0" expanded="false" />
+                <element signature="e#1666#1943#0" expanded="false" />
+                <element signature="e#1986#2042#0" expanded="false" />
+                <element signature="e#2237#3138#0" expanded="false" />
+                <element signature="e#3206#4807#0" expanded="false" />
+                <element signature="e#4866#7660#0" expanded="false" />
+                <element signature="e#12265#13465#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="one_match_simulator.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/one_match_simulator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="349">
-              <caret line="118" column="50" lean-forward="false" selection-start-line="118" selection-start-column="50" selection-end-line="118" selection-end-column="50" />
+            <state relative-caret-position="333">
+              <caret line="86" column="59" lean-forward="false" selection-start-line="86" selection-start-column="59" selection-end-line="86" selection-end-column="59" />
               <folding>
                 <element signature="e#1650#1814#0" expanded="false" />
                 <element signature="e#1848#2749#0" expanded="false" />
@@ -89,8 +121,8 @@
         <option value="$PROJECT_DIR$/assign_xG_to_football_data.py" />
         <option value="$PROJECT_DIR$/Fixtures/E0/Remaining 17-18 Fixtures.csv" />
         <option value="$PROJECT_DIR$/tipster.py" />
-        <option value="$PROJECT_DIR$/simulation_17-18.py" />
         <option value="$PROJECT_DIR$/one_match_simulator.py" />
+        <option value="$PROJECT_DIR$/simulation_17-18.py" />
       </list>
     </option>
   </component>
@@ -582,19 +614,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/one_match_simulator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="349">
-          <caret line="118" column="50" lean-forward="false" selection-start-line="118" selection-start-column="50" selection-end-line="118" selection-end-column="50" />
-          <folding>
-            <element signature="e#1650#1814#0" expanded="false" />
-            <element signature="e#1848#2749#0" expanded="false" />
-            <element signature="e#2817#4418#0" expanded="false" />
-            <element signature="e#4477#7271#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assign_xG_to_football_data.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
@@ -609,10 +628,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/one_time_xG_plotter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="86">
+          <caret line="254" column="29" lean-forward="true" selection-start-line="254" selection-start-column="29" selection-end-line="254" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/All shots from 17-18/E0/shots_scraper 17-18_gameweek.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="51" column="26" lean-forward="false" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tipster.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1177">
+          <caret line="98" column="59" lean-forward="false" selection-start-line="98" selection-start-column="59" selection-end-line="98" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one_match_simulator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="86" column="59" lean-forward="false" selection-start-line="86" selection-start-column="59" selection-end-line="86" selection-end-column="59" />
+          <folding>
+            <element signature="e#1650#1814#0" expanded="false" />
+            <element signature="e#1848#2749#0" expanded="false" />
+            <element signature="e#2817#4418#0" expanded="false" />
+            <element signature="e#4477#7271#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/simulation_17-18.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="130" column="50" lean-forward="false" selection-start-line="130" selection-start-column="50" selection-end-line="130" selection-end-column="50" />
+        <state relative-caret-position="282">
+          <caret line="183" column="0" lean-forward="true" selection-start-line="183" selection-start-column="0" selection-end-line="183" selection-end-column="0" />
           <folding>
             <element signature="e#273#292#0" expanded="true" />
             <element signature="e#466#553#0" expanded="false" />
@@ -628,30 +684,6 @@
             <element signature="e#4866#7660#0" expanded="false" />
             <element signature="e#12265#13465#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tipster.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="181" column="0" lean-forward="true" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/one_time_xG_plotter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="254" column="29" lean-forward="true" selection-start-line="254" selection-start-column="29" selection-end-line="254" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/All shots from 17-18/E0/shots_scraper 17-18_gameweek.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
