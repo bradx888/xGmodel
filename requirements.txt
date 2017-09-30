@@ -9,6 +9,7 @@ botocore==1.7.13
 bs4==0.0.1
 certifi==2017.7.27.1
 chardet==3.0.4
+click==6.7
 colorama==0.3.9
 configparser==3.5.0
 cycler==0.10.0
@@ -16,7 +17,7 @@ decorator==4.1.2
 delegator.py==0.0.13
 docopt==0.6.2
 docutils==0.14
--e git+https://gitlab.channel4.com/datascience/infrastructure@136e9f648b114c5cc8889244d27c31216c2f17cf#egg=dsde&subdirectory=dsdetool
+-e git+https://gitlab.channel4.com/datascience/infrastructure@f0960b19c4ab6685c24d00892bcf3fc1a282909c#egg=dsde&subdirectory=dsdetool
 entrypoints==0.2.3
 enum34==1.1.6
 functools32==3.2.3.post2
@@ -35,6 +36,7 @@ jupyter==1.0.0
 jupyter-client==5.1.0
 jupyter-console==5.2.0
 jupyter-core==4.3.0
+lxml==4.0.0
 MarkupSafe==1.0
 matplotlib==2.0.2
 mistune==0.7.4
