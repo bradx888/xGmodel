@@ -375,7 +375,7 @@ def get_tips(schedule, boolean):
 def send_tips():
     gmail_username = "automatedtransactionsbg@gmail.com"
     gmail_password = "Z1s$ASuo#2NE"
-    toaddr = 'bgrantham343@gmail.com'
+    toaddr = 'bradley.grantham@bath.edu'
     msg = MIMEMultipart()
 
     # set the to and from address as well as the subject
@@ -408,7 +408,7 @@ def send_tips():
 def send_all():
     gmail_username = "automatedtransactionsbg@gmail.com"
     gmail_password = "Z1s$ASuo#2NE"
-    toaddr = 'bgrantham343@gmail.com'
+    toaddr = 'bradley.grantham@bath.edu'
     msg = MIMEMultipart()
 
     # set the to and from address as well as the subject
