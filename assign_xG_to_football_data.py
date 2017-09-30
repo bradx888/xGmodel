@@ -83,7 +83,7 @@ def add_xG_to_fd(raw_shots, football_data):
             if index == row1['Match No'] and row1['Team'] == row['HomeTeam']:
                 football_data.set_value(index, 'xGH', row1['Proba_exp'])
 
-    football_data.to_csv('./Football-data.co.uk/E0/17-18.csv')
+    football_data.to_csv('./Football-data.co.uk/E0/17-18.csv', index=False)
 
 raw_shots = pd.read_csv('./All shots from 17-18/E0/shots.csv', index_col=0)
 football_data = pd.read_csv('./Football-data.co.uk/E0/17-18.csv')
@@ -93,4 +93,8 @@ raw_shots.replace(mappings[0], inplace=True)
 raw_shots = tidy_and_format_data(raw_shots)
 
 add_xG_to_fd(raw_shots, football_data)
+
+raw_shots = raw_shots[(raw_shots['Against']=='Crystal Palace')
+                      & (raw_shots['Scored']=='Scored') & (raw_shots['Team'] == 'Burnley')]
+print(raw_shots.head())
 

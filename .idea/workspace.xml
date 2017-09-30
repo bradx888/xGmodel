@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="709076f2-c8bd-4085-aba0-0351b013d710" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Performance/BettingPerformance.xlsx" afterPath="$PROJECT_DIR$/Performance/BettingPerformance.xlsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/All shots from 17-18/E0/shots.csv" afterPath="$PROJECT_DIR$/All shots from 17-18/E0/shots.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Fixtures/E0/Remaining 17-18 Fixtures.csv" afterPath="$PROJECT_DIR$/Fixtures/E0/Remaining 17-18 Fixtures.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Football-data.co.uk/E0/17-18.csv" afterPath="$PROJECT_DIR$/Football-data.co.uk/E0/17-18.csv" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Team ratings/E0/teamratings_17-18.csv" afterPath="$PROJECT_DIR$/Team ratings/E0/teamratings_17-18.csv" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/one_match_simulator.py" afterPath="$PROJECT_DIR$/one_match_simulator.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assign_xG_to_football_data.py" afterPath="$PROJECT_DIR$/assign_xG_to_football_data.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tipster.py" afterPath="$PROJECT_DIR$/tipster.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,38 +17,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="tipster.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tipster.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4128">
-              <caret line="270" column="32" lean-forward="false" selection-start-line="270" selection-start-column="32" selection-end-line="270" selection-end-column="32" />
-              <folding>
-                <element signature="e#158#176#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="one_time_xG_plotter.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/one_time_xG_plotter.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4288">
-              <caret line="277" column="0" lean-forward="false" selection-start-line="277" selection-start-column="0" selection-end-line="277" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Remaining 17-18 Fixtures.csv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Fixtures/E0/Remaining 17-18 Fixtures.csv">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="23" lean-forward="false" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="shots_scraper 17-18_gameweek.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/All shots from 17-18/E0/shots_scraper 17-18_gameweek.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -61,10 +27,30 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="simulation_17-18.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="one_time_xG_plotter.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/one_time_xG_plotter.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="246">
+              <caret line="264" column="51" lean-forward="false" selection-start-line="264" selection-start-column="51" selection-end-line="264" selection-end-column="51" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="tipster.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tipster.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="106">
+              <caret line="408" column="26" lean-forward="true" selection-start-line="408" selection-start-column="26" selection-end-line="408" selection-end-column="26" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="simulation_17-18.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/simulation_17-18.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
+            <state relative-caret-position="800">
               <caret line="192" column="39" lean-forward="false" selection-start-line="192" selection-start-column="39" selection-end-line="192" selection-end-column="39" />
               <folding>
                 <element signature="e#273#292#0" expanded="true" />
@@ -86,6 +72,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="assign_xG_to_football_data.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/assign_xG_to_football_data.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1536">
+              <caret line="97" column="91" lean-forward="false" selection-start-line="97" selection-start-column="91" selection-end-line="97" selection-end-column="91" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -100,6 +96,7 @@
       <find>chromedri</find>
       <find>mc_it</find>
       <find>initial_points</find>
+      <find>bgrantham</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -111,10 +108,11 @@
         <option value="$PROJECT_DIR$/hackerrank_DELETE.py" />
         <option value="$PROJECT_DIR$/one_time_xG_plotter.py" />
         <option value="$PROJECT_DIR$/All shots from 17-18/E0/shots_scraper 17-18_gameweek.py" />
-        <option value="$PROJECT_DIR$/tipster.py" />
         <option value="$PROJECT_DIR$/simulation_17-18.py" />
         <option value="$PROJECT_DIR$/one_match_simulator.py" />
         <option value="$PROJECT_DIR$/Fixtures/E0/Remaining 17-18 Fixtures.csv" />
+        <option value="$PROJECT_DIR$/assign_xG_to_football_data.py" />
+        <option value="$PROJECT_DIR$/tipster.py" />
       </list>
     </option>
   </component>
@@ -138,7 +136,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -149,19 +147,13 @@
             <path>
               <item name="xGmodel" type="b2602c69:ProjectViewProjectNode" />
               <item name="xGmodel" type="462c0819:PsiDirectoryNode" />
-              <item name="Football-data.co.uk" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="xGmodel" type="b2602c69:ProjectViewProjectNode" />
-              <item name="xGmodel" type="462c0819:PsiDirectoryNode" />
-              <item name="Football-data.co.uk" type="462c0819:PsiDirectoryNode" />
-              <item name="E0" type="462c0819:PsiDirectoryNode" />
+              <item name="xG Plots" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -184,7 +176,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.simulation_17-18">
+  <component name="RunManager" selected="Python.tipster">
     <configuration name="assign_xG_to_football_data" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -198,23 +190,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="xGmodel" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/assign_xG_to_football_data.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
-    <configuration name="one_match_simulator" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="xGmodel" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/one_match_simulator.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -270,20 +245,37 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
     </configuration>
+    <configuration name="tipster" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="xGmodel" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tipster.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.one_time_xG_plotter" />
       <item index="1" class="java.lang.String" itemvalue="Python.simulation_17-18" />
-      <item index="2" class="java.lang.String" itemvalue="Python.one_match_simulator" />
-      <item index="3" class="java.lang.String" itemvalue="Python.shots_scraper 17-18_gameweek" />
-      <item index="4" class="java.lang.String" itemvalue="Python.assign_xG_to_football_data" />
+      <item index="2" class="java.lang.String" itemvalue="Python.shots_scraper 17-18_gameweek" />
+      <item index="3" class="java.lang.String" itemvalue="Python.assign_xG_to_football_data" />
+      <item index="4" class="java.lang.String" itemvalue="Python.tipster" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.simulation_17-18" />
-        <item index="1" class="java.lang.String" itemvalue="Python.assign_xG_to_football_data" />
-        <item index="2" class="java.lang.String" itemvalue="Python.shots_scraper 17-18_gameweek" />
-        <item index="3" class="java.lang.String" itemvalue="Python.one_time_xG_plotter" />
-        <item index="4" class="java.lang.String" itemvalue="Python.one_match_simulator" />
+        <item index="0" class="java.lang.String" itemvalue="Python.tipster" />
+        <item index="1" class="java.lang.String" itemvalue="Python.one_time_xG_plotter" />
+        <item index="2" class="java.lang.String" itemvalue="Python.assign_xG_to_football_data" />
+        <item index="3" class="java.lang.String" itemvalue="Python.simulation_17-18" />
+        <item index="4" class="java.lang.String" itemvalue="Python.shots_scraper 17-18_gameweek" />
       </list>
     </recent_temporary>
   </component>
@@ -303,16 +295,16 @@
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="824" extended-state="0" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26108727" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26824033" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29903978" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32921812" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32921812" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39917696" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -333,16 +325,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/xG Plots/Other Plots/Southampton-Man United 23-09-2017.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/xG Plots/Other Plots/Man City-Crystal Palace 23-09-2017.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/xG Plots/Other Plots/Leicester-Liverpool 23-09-2017.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -394,9 +376,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4128">
           <caret line="270" column="32" lean-forward="false" selection-start-line="270" selection-start-column="32" selection-end-line="270" selection-end-column="32" />
-          <folding>
-            <element signature="e#158#176#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -412,9 +392,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4320">
           <caret line="270" column="32" lean-forward="false" selection-start-line="270" selection-start-column="32" selection-end-line="270" selection-end-column="32" />
-          <folding>
-            <element signature="e#158#176#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -561,16 +539,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tipster.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4128">
-          <caret line="270" column="32" lean-forward="false" selection-start-line="270" selection-start-column="32" selection-end-line="270" selection-end-column="32" />
-          <folding>
-            <element signature="e#158#176#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/xG Plots/Other Plots/Swansea-Watford 23-09-2017.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -613,26 +581,10 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/one_time_xG_plotter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4288">
-          <caret line="277" column="0" lean-forward="false" selection-start-line="277" selection-start-column="0" selection-end-line="277" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Fixtures/E0/Remaining 17-18 Fixtures.csv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="23" lean-forward="false" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/assign_xG_to_football_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -653,7 +605,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/simulation_17-18.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
+        <state relative-caret-position="800">
           <caret line="192" column="39" lean-forward="false" selection-start-line="192" selection-start-column="39" selection-end-line="192" selection-end-column="39" />
           <folding>
             <element signature="e#273#292#0" expanded="true" />
@@ -671,6 +623,40 @@
             <element signature="e#4866#7660#0" expanded="false" />
             <element signature="e#12265#13465#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assign_xG_to_football_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1536">
+          <caret line="97" column="91" lean-forward="false" selection-start-line="97" selection-start-column="91" selection-end-line="97" selection-end-column="91" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xG Plots/Other Plots/Paris SG-Bayern Munich 27-09-2017.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/xG Plots/Other Plots/Ath Madrid-Chelsea 27-09-2017.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/one_time_xG_plotter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="264" column="51" lean-forward="false" selection-start-line="264" selection-start-column="51" selection-end-line="264" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tipster.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="408" column="26" lean-forward="true" selection-start-line="408" selection-start-column="26" selection-end-line="408" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
