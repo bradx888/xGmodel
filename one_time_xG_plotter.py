@@ -290,5 +290,6 @@ def main():
     shot_data = pd.read_csv('./xG Plots/Other Plots/temp.csv', index_col=0)
     plot_data(shot_data, home_team, away_team, match_date)
 
-main()
-
+if __name__ == '__main__':
+    main()
+    
