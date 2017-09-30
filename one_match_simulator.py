@@ -186,7 +186,7 @@ population, weights = bivpois2(home_attack*away_defense, away_attack*home_defens
 percentages = calculate_win_perc(population, weights)
 overs, unders = calculate_goal_line(population, weights)
 
-print(home_team, 1 - percentages[0])
+print(home_team, 1/percentages[0])
 print('Draw', 1/percentages[1])
 print(away_team, 1/percentages[2])
 print('O 2.5', 1/overs)
