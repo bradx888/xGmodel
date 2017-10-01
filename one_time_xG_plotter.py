@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patheffects as path_effects
 import datetime
 import time
+import click
 
 def sigmoid(x):
     return 1/(1+np.exp(-x))
@@ -292,4 +293,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
