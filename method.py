@@ -83,7 +83,7 @@ def read_in_team_ratings():
     new_data.to_csv('./Team ratings/E0/teamratings_17-18.csv')
     return new_data
 
-def combine_ratings(new_data, team_ratings, exp_factor=0.32):
+def combine_ratings(new_data, team_ratings, exp_factor=0.24):
     '''
     :param new_data: new_data is the current seasons ratings
     :param team_ratings: team_ratings is last seasons ratings
@@ -115,7 +115,7 @@ def combine_ratings(new_data, team_ratings, exp_factor=0.32):
 
     return new_data
 
-def calculate_this_seasons_ratings(exp_factor=0.32):
+def calculate_this_seasons_ratings(exp_factor=0.24):
     data = pd.read_csv(
         './Football-data.co.uk/E0/17-18.csv'
     )
