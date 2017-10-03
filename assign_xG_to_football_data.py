@@ -94,7 +94,4 @@ raw_shots = tidy_and_format_data(raw_shots)
 
 add_xG_to_fd(raw_shots, football_data)
 
-raw_shots = raw_shots[(raw_shots['Against']=='Crystal Palace')
-                      & (raw_shots['Scored']=='Scored') & (raw_shots['Team'] == 'Burnley')]
-print(raw_shots.head())
 
