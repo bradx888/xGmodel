@@ -40,11 +40,9 @@ def tidy_and_format_data(shot_data):
     :param shot_data:
     :return:
     '''
-    shot_data['Over240'] = 1
     for index, row in shot_data.iterrows():
         if row['x'] > 240:
             shot_data.set_value(index, 'x', 480 - row['x'])
-            shot_data.set_value(index, 'Over240', 0)
 
     shot_data['y'] = shot_data['y'] - 366/2
     shot_data['y'] = shot_data['y'] * -1
@@ -55,10 +53,10 @@ def tidy_and_format_data(shot_data):
     # assign colours and numbers based on whether the shots were scored or missed
     for index, row in shot_data.iterrows():
         if row['Scored'] == 'Scored':
-            shot_data.set_value(index, 'Colour', 'b')
+            shot_data.set_value(index, 'Colour', 'magenta')
             shot_data.set_value(index, 'ScoredBinary', 1)
         else:
-            shot_data.set_value(index, 'Colour', 'r')
+            shot_data.set_value(index, 'Colour', 'white')
             shot_data.set_value(index, 'ScoredBinary', 0)
 
     shot_data['Proba_exp'] = nn_prob(shot_data)
@@ -88,7 +86,7 @@ football_data['Date'] = pd.to_datetime(football_data['Date'], format='%d/%m/%y')
 data['Date'] = pd.to_datetime(data['Date'], format='%d-%m-%Y')
 mappings = pd.read_csv('./All shots from 17-18/E0/mappings.csv', index_col=1, header=None)
 data.replace(mappings[0], inplace=True)
-img = imread('./xG Plots/background.jpg')
+img = imread('./xG Plots/background3.jpg')
 img = np.swapaxes(img, 0, 1)
 
 data = tidy_and_format_data(data) # add xG values to each shot and a colour etc
@@ -119,25 +117,40 @@ data.sort_values(by=['Scored'], ascending=True, inplace=True)
 
 fig, ax = plt.subplots()
 
-ax.scatter(data[data.Header == 0]['y'], data[data.Header == 0]['x'], marker="o", s=data[data.Header == 0]['Proba_exp']*800,
-            facecolors=data[data.Header == 0]['Colour'],
-            edgecolors='black', linewidth=0.4)
-ax.scatter(data[data.Header == 1]['y'], data[data.Header == 1]['x'], marker="^", s=data[data.Header == 1]['Proba_exp']*800,
-            facecolors=data[data.Header == 1]['Colour'],
-            edgecolors='black', linewidth=0.4)
+
+ax.scatter(data[(data.Header == 0) & (data.Scored == 'Missed')]['y'],
+                   data[(data.Header == 0) & (data.Scored == 'Missed')]['x'], marker="o",
+                   s=data[(data.Header == 0) & (data.Scored == 'Missed')]['Proba_exp']*800,
+            facecolors=data[(data.Header == 0) & (data.Scored == 'Missed')]['Colour'],
+            edgecolors='black', linewidth=0.6, label='Shots', alpha=0.6)
+ax.scatter(data[(data.Header == 1) & (data.Scored == 'Missed')]['y'],
+                     data[(data.Header == 1) & (data.Scored == 'Missed')]['x'], marker="^",
+                     s=data[(data.Header == 1) & (data.Scored == 'Missed')]['Proba_exp']*800,
+            facecolors=data[(data.Header == 1) & (data.Scored == 'Missed')]['Colour'],
+            edgecolors='black', linewidth=0.6, label='Headers', alpha=0.6)
+ax.scatter(data[(data.Header == 0) & (data.Scored == 'Scored')]['y'],
+                   data[(data.Header == 0) & (data.Scored == 'Scored')]['x'], marker="o",
+                   s=data[(data.Header == 0) & (data.Scored == 'Scored')]['Proba_exp']*800,
+            facecolors=data[(data.Header == 0) & (data.Scored == 'Scored')]['Colour'],
+            edgecolors='black', linewidth=0.6, label='Shots', alpha=1.0)
+ax.scatter(data[(data.Header == 1) & (data.Scored == 'Scored')]['y'],
+                     data[(data.Header == 1) & (data.Scored == 'Scored')]['x'], marker="^",
+                     s=data[(data.Header == 1) & (data.Scored == 'Scored')]['Proba_exp']*800,
+            facecolors=data[(data.Header == 1) & (data.Scored == 'Scored')]['Colour'],
+            edgecolors='black', linewidth=0.6, label='Headers', alpha=1.0)
+
 plt.xlim(-366/2, 366/2)
 plt.ylim(-10, 250)
 plt.imshow(img, zorder=0, extent=[-366/2, 366/2, -10, 490])
-text = plt.text(0, 188, team + '\n' + 'Goals: ' + str(goals) + '\n' + 'xG: ' + str(xG),
-                horizontalalignment='center',
-         color='gold', fontsize=10, fontweight='bold')
+text = plt.text(-165, 200, team + '\n' + 'Goals: ' + str(goals) + '\n' + 'xG: ' + str(xG),
+                horizontalalignment='left',
+                color='white', alpha=0.8, fontsize=10, fontweight='bold')
 text.set_path_effects([path_effects.Stroke(linewidth=1, foreground='black'),
                        path_effects.Normal()])
 
 plt.subplots_adjust(left=0.01, bottom=0.01, right=0.99, top=0.99,
                 wspace=None, hspace=None)
 plt.axis('off')
-plt.show()
 fig.savefig('./xG Plots/17-18 Teams/' + team + ' ' + datetime.today().strftime("%Y-%m-%d") + '.png',
             bbox_inches=0, pad_inches=0)
 
