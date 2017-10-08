@@ -91,9 +91,9 @@ img = np.swapaxes(img, 0, 1)
 
 data = tidy_and_format_data(data) # add xG values to each shot and a colour etc
 
-print(list(data.groupby(['PlayerID'])['Proba_exp'].sum().sort_values(ascending=False).head(20).index.values))
+print(data.groupby(['PlayerID', 'PlayerName'])[['Proba_exp', 'ScoredBinary']].sum().sort_values('ScoredBinary', ascending=False).head(20))
 
-player_id = input('Input player ID: ')
+player_id = input('Enter player ID: ')
 player_id = int(player_id)
 
 print(data[data.PlayerID == player_id]['PlayerName'].head(1))
@@ -110,9 +110,6 @@ except KeyError:
     goals = 0
 
 xG = np.round(sum(data['Proba_exp']), 2)
-
-
-data['Colour'] = data['Colour'].replace({'r': 'lightcoral', 'b':'royalblue'})
 
 data = flip_y_values_if_away_team(football_data, data)
 
@@ -147,7 +144,7 @@ plt.ylim(-10, 250)
 plt.imshow(img, zorder=0, extent=[-366/2, 366/2, -10, 490])
 text = plt.text(-165, 200, player_name + '\n' + team + '\n' + 'Goals: ' + str(goals) + '\n' + 'xG: ' + str(xG),
                 horizontalalignment='left',
-         ccolor='white', alpha=0.8, fontsize=10, fontweight='bold')
+         color='white', alpha=0.8, fontsize=10, fontweight='bold')
 text.set_path_effects([path_effects.Stroke(linewidth=1, foreground='black'),
                            path_effects.Normal()])
 plt.legend(handles=[headers], loc=3)

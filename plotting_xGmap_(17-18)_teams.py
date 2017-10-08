@@ -151,7 +151,8 @@ text.set_path_effects([path_effects.Stroke(linewidth=1, foreground='black'),
 plt.subplots_adjust(left=0.01, bottom=0.01, right=0.99, top=0.99,
                 wspace=None, hspace=None)
 plt.axis('off')
-fig.savefig('./xG Plots/17-18 Teams/' + team + ' ' + datetime.today().strftime("%Y-%m-%d") + '.png',
+fig.savefig('./xG Plots/17-18 Teams/' + team + ' ' + xG_for_or_against + ' '
+            + datetime.today().strftime("%Y-%m-%d") + '.png',
             bbox_inches=0, pad_inches=0)
 
 
