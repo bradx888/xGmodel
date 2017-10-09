@@ -108,6 +108,8 @@ except KeyError:
 
 xG = np.round(sum(data['Proba_exp']), 2)
 
+mean_xG = xG/len(data)
+
 
 data['Colour'] = data['Colour'].replace({'r': 'lightcoral', 'b':'royalblue'})
 
@@ -142,7 +144,8 @@ ax.scatter(data[(data.Header == 1) & (data.Scored == 'Scored')]['y'],
 plt.xlim(-366/2, 366/2)
 plt.ylim(-10, 250)
 plt.imshow(img, zorder=0, extent=[-366/2, 366/2, -10, 490])
-text = plt.text(-165, 200, team + '\n' + 'Goals: ' + str(goals) + '\n' + 'xG: ' + str(xG),
+text = plt.text(-165, 200, team + '\n' + 'Goals: ' + str(goals) + '\n' + 'xG: ' + str(xG)
+                + '\n' + 'Mean xG: ' + str(np.round(mean_xG, 2)),
                 horizontalalignment='left',
                 color='white', alpha=0.8, fontsize=10, fontweight='bold')
 text.set_path_effects([path_effects.Stroke(linewidth=1, foreground='black'),

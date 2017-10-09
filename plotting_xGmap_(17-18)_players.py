@@ -115,6 +115,8 @@ data = flip_y_values_if_away_team(football_data, data)
 
 data.sort_values(by=['Scored'], ascending=True, inplace=True)
 
+mean_xG = xG/len(data)
+
 fig, ax = plt.subplots()
 
 
@@ -142,7 +144,8 @@ headers = ax.scatter(data[(data.Header == 1) & (data.Scored == 'Scored')]['y'],
 plt.xlim(-366/2, 366/2)
 plt.ylim(-10, 250)
 plt.imshow(img, zorder=0, extent=[-366/2, 366/2, -10, 490])
-text = plt.text(-165, 200, player_name + '\n' + team + '\n' + 'Goals: ' + str(goals) + '\n' + 'xG: ' + str(xG),
+text = plt.text(-165, 192, player_name + '\n' + team + '\n' + 'Goals: ' + str(goals) + '\n' + 'xG: ' + str(xG)
+                    + '\n' + 'Mean xG: ' + str(np.round(mean_xG, 2)),
                 horizontalalignment='left',
          color='white', alpha=0.8, fontsize=10, fontweight='bold')
 text.set_path_effects([path_effects.Stroke(linewidth=1, foreground='black'),
