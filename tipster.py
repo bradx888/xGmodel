@@ -16,6 +16,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import schedule
+import method
 
 def myprob(distance, angle):
     x = distance*np.power((angle+1), 0.5)
@@ -332,7 +333,7 @@ def send_all():
 def main():
     todays_schedule = None #get_flashscores_schedule()
     next7days_schedule = read_in_fixtures(todays_schedule)
-    team_ratings = read_in_team_ratings()
+    team_ratings = method.read_in_team_ratings()
     next7days_schedule = get_corresponding_odds(next7days_schedule, team_ratings)
     get_tips(next7days_schedule, '7days')
     send_all()
