@@ -205,7 +205,7 @@ while len(list_of_matchnos) != 0:
         pass
 
     driver.quit()
-    time.sleep(60)
+    time.sleep(10)
 
 player_ids = pd.Series(data=player_names, index=player_ids)
 shots_data_df['PlayerName'].replace(player_ids, inplace=True)

@@ -1,0 +1,4 @@
+http://s3-irl-epl.squawka.com/dp/ingame_rdp/32964
+
+this is the address for which the raw data is at. This can be got
+simply using requests.
