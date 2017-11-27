@@ -1,9 +1,10 @@
 ,HomeTeam,AwayTeam,Selection,MyOdds,Bookies Odds,Bookie
-0,Chelsea,Man Utd,Home Winner,2.38,2.57,MR
-1,Everton,Watford,Home Winner,2.02,2.12,MR
-2,Huddersfield,West Brom,Away Winner,2.5,3.08,MR
-3,Man City,Arsenal,Home Winner,1.49,1.53,SK
-4,Newcastle,Bournemouth,Home Winner,1.97,2.1,BL
-5,Southampton,Burnley,Home Winner,1.47,1.68,MR
-6,Stoke,Leicester,Home Winner,1.96,2.63,MR
-7,Swansea,Brighton,Home Winner,2.08,2.25,MR
+0,Chelsea,Man Utd,Away Winner,2.62,3.2,"SO,FR,MR,VC"
+1,Everton,Watford,Away Winner,2.57,3.8999999999999995,MR
+2,Man City,Arsenal,Home Winner,1.41,1.5,"B3,SK,LD,WH,FB,P3,CE,BY,BL,WA,BB,MR,SJ,VC"
+3,Newcastle,Bournemouth,Home Winner,1.85,2.1,BL
+4,Southampton,Burnley,Home Winner,1.42,1.68,MR
+5,Stoke,Leicester,Home Winner,1.99,2.63,MR
+6,Swansea,Brighton,Home Winner,2.29,2.3,"SK,LD,FB,P3,CE,PS,OE,SJ,VC,PE"
+7,Tottenham,Crystal Palace,Home Winner,1.28,1.29,"SK,SJ"
+8,West Ham,Liverpool,Home Winner,2.73,5.3,MR
